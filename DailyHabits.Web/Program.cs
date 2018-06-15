@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DailyHabits.Web.Configuration;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,11 @@ namespace DailyHabits.Web
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+			var host = CreateWebHostBuilder(args).Build();
+
+			DailyHabitsDataContextInitializer.Initialize(host.Services);
+
+			host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

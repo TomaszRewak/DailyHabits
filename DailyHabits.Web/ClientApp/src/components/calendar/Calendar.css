@@ -1,0 +1,91 @@
+﻿.calendar-body {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.calendar-day {
+	display: flex;
+	flex-direction: row;
+}
+
+.calendar-day-label {
+	width: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: lightgrey;
+	margin: 1px;
+	pointer-events: none;
+}
+
+	.calendar-day-label > div {
+		margin: 0 -50px;
+		width: 100px;
+		transform: rotate(-90deg);
+		transform-origin: center;
+		text-align: center;
+		font-weight: 600;
+	}
+
+.calendar-day-body {
+	min-width: 20px;
+	min-height: 20px;
+	background-color: lightgray;
+	border: 1px solid gray;
+	margin: 4px 1px;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 4px;
+}
+
+	.calendar-day-body > .calendar-event,
+	.calendar-day-body > .calendar-separator,
+	.calendar-day-body > .calendar-placeholder,
+	.calendar-day-body > .calendar-upcoming {
+		height: 20px;
+		margin-top: 4px;
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid rgba(0,0,0,0.4);
+		border-bottom: 1px solid rgba(0,0,0,0.4);
+	}
+
+.calendar-event,
+.calendar-separator {
+	margin-left: -2px;
+	margin-right: -2px;
+}
+
+.calendar-event-indicator {
+	flex: 1;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.calendar-separator {
+	background-color: blue;
+}
+
+.calendar-separator-event-indicator {
+	flex: 1;
+}
+
+.calendar-separator-progress-indicator {
+	flex: 3;
+}
+
+	.calendar-separator-progress-indicator[data-day="1"] {
+		border-radius: 20px 0 0 20px;
+		margin-left: 3px;
+	}
+
+.calendar-placeholder {
+	background-color: #b5b5b5;
+}
+
+.calendar-upcoming {
+	background-color: #b5b5b5;
+}
