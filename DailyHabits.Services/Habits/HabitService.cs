@@ -32,6 +32,14 @@ namespace DailyHabits.Services.Habits
 			var newHabit = new Habit
 			{
 				Name = request.Name,
+				Icon = request.Icon,
+
+				BaseColor = request.BaseColor,
+				InitialColor = request.InitialColor,
+				FinalColor = request.FinalColor,
+
+				Target = request.Target,
+
 				UserId = authResponse.Payload
 			};
 
@@ -85,7 +93,16 @@ namespace DailyHabits.Services.Habits
 			if (editedHabit == null)
 				return Failure();
 
-			editedHabit.Name = request.Name;
+			{
+				editedHabit.Name = request.Name;
+				editedHabit.Icon = request.Icon;
+
+				editedHabit.BaseColor = request.BaseColor;
+				editedHabit.InitialColor = request.InitialColor;
+				editedHabit.FinalColor = request.FinalColor;
+
+				editedHabit.Target = request.Target;
+			}
 
 			try
 			{ _dataContext.SaveChanges(); }
@@ -120,9 +137,18 @@ namespace DailyHabits.Services.Habits
 			var habits = _dataContext
 				.Habits
 				.Where(habit => habit.UserId == authResponse.Payload)
-				.Select(habit => new GetHabitResponse {
+				.Select(habit => new GetHabitResponse
+				{
 					Id = habit.Id,
-					Name = habit.Name
+
+					Name = habit.Name,
+					Icon = habit.Icon,
+
+					BaseColor = habit.BaseColor,
+					InitialColor = habit.InitialColor,
+					FinalColor = habit.FinalColor,
+
+					Target = habit.Target
 				})
 				.ToList();
 

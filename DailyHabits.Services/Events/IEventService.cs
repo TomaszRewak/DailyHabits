@@ -10,5 +10,7 @@ namespace DailyHabits.Services.Events
 		ServiceResponse<int> CreateEvent(CreateEventRequest request);
 
 		ServiceResponse DeleteEvent(int eventId);
+
+		ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to);
     }
 }

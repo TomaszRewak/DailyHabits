@@ -77,5 +77,28 @@ namespace DailyHabits.Services.Events
 
 			return Success();
 		}
+
+		public ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to)
+		{
+			var authResponse = _authService.GetCurrentUserId();
+
+			if (authResponse.Failure)
+				return Failure<IEnumerable<GetEventResponse>>();
+
+			var list = _dataContext
+				.Events
+				.Where(e => e.Habit.UserId == authResponse.Payload)
+				.Where(e => e.Timestamep >= from && e.Timestamep <= to)
+				.Select(e => new GetEventResponse
+				{
+					Id = e.Id,
+					HabitId = e.HabitId,
+					Timestamp = e.Timestamep
+				})
+				.ToList()
+				.AsEnumerable();
+
+			return Success(list);
+		}
 	}
 }

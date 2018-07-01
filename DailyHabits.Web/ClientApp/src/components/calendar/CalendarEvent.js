@@ -1,18 +1,22 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component } from 'react'
 
-class CalendarEvent extends Component {
+export default class CalendarEvent extends Component {
+	constructor(props) {
+		super(props);
+
+		this.deleteEvent = this.deleteEvent.bind(this);
+	}
+
 	render() {
 		return (
 			<div className="calendar-event">
-				<div
-					className="calendar-event-indicator"
-					style={{ backgroundColor: this.props.eventColor }}
-				>
-					<span className={`glyphicon glyphicon-${this.props.icon}`}></span>
-				</div>
+				<div class="delete-event-button" onClick={this.deleteEvent}>x</div>
 			</div>
 		);
 	}
-}
 
-export default CalendarEvent;
+	deleteEvent() {
+		if (this.props.deleteEvent)
+			this.props.deleteEvent(this.props.id);
+	}
+}

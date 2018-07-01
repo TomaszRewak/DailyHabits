@@ -4,7 +4,8 @@ using System.Text;
 
 namespace DailyHabits.Services.Events.Model
 {
-    public class CreateEventRequest : EventModel
+    public class GetEventResponse : EventModel
     {
-    }
+		public int Id { get; set; }
+	}
 }

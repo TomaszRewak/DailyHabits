@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DailyHabits.Services.Habits.Model
 {
-    public class GetHabitResponse : ManageHabitRequest
+    public class GetHabitResponse : HabitModel
     {
 		public int Id { get; set; }
 	}

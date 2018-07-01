@@ -16,6 +16,10 @@ class HabitManager extends Component {
 		this.onCreate = this.onCreate.bind(this);
 	}
 
+	componentWillMount() {
+		this.props.requestHabitData();
+	}
+
 	render() {
 		return (
 			<div className="habit-manager">
@@ -23,9 +27,11 @@ class HabitManager extends Component {
 					{
 						this.props.habits.map(habit =>
 							<HabitManagerItem
+								key={habit.id}
 								id={habit.id}
 								name={habit.name}
 								icon={habit.icon}
+								onDelete={this.onDelete}
 							/>
 						)
 					}
@@ -40,7 +46,7 @@ class HabitManager extends Component {
 	}
 
 	onDelete(habitId) {
-
+		this.props.deleteHabit(habitId);
 	}
 
 	onCreate() {
@@ -52,7 +58,7 @@ class HabitManager extends Component {
 
 export default connect(
 	state => {
-		let habits = state.habits.availableHabits;
+		let habits = state.habits;
 
 		return { habits: habits };
 	},

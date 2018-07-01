@@ -3,116 +3,100 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actionCreators } from '../../store/Calendar';
+import { actionCreators as calendarActionCreater } from '../../store/Calendar';
+import { actionCreators as eventsActionCreator } from '../../store/Events'
+import { getDaysOffset, addDays, resetTime } from '../../utils/Date'
 
-import CalendarDay from './CalendarDay'
+import CalendarWorkspace from './CalendarWorkspace'
 
 class Calendar extends Component {
 	constructor(props) {
 		super(props);
 
 		this.addEvent = this.addEvent.bind(this);
+		this.deleteEvent = this.deleteEvent.bind(this);
 	}
 
 	componentWillMount() {
-		this.props.requestCalendarData();
+		this.props.setInterval(
+			resetTime(addDays(new Date(), -100)),
+			resetTime(addDays(new Date(), 2))
+		);
 	}
 
 	render() {
 		return (
-			<div>
-				<h2>Calendar</h2>
-				<div className="calendar-body">
-					{
-						this.props.days.map(day =>
-							<CalendarDay day={day.day} events={day.events} onAddEvent={this.addEvent}>
-							</CalendarDay>
-						)
-					}
-				</div>
-			</div>
+			<CalendarWorkspace
+				flows={this.props.flows}
+				addEvent={this.addEvent}
+				deleteEvent={this.deleteEvent}
+			/>
 		);
 	}
 
-	addEvent(date, habit) {
-		this.props.addEvent(date, habit);
+	addEvent(habitId, date) {
+		this.props.addEvent({
+			habitId: habitId,
+			timestamp: date
+		});
+	}
+
+	deleteEvent(eventId) {
+		this.props.removeEvent(eventId);
 	}
 }
 
 export default connect(
 	(state) => {
-		let calendar = state.calendar;
-		let availableHabits = state.habits.availableHabits;
+		const startDate = state.calendar.startDate;
+		const endDate = state.calendar.endDate;
 
-		let getDay = (date) => Math.round((date.getTime() - calendar.startDate.getTime()) / 1000 / 60 / 60 / 24);
-		let getDate = (day) => new Date(calendar.startDate.getTime() + day * 24 * 60 * 60 * 1000);
+		const days = getDaysOffset(startDate, endDate);
 
-		let days = getDay(calendar.endDate) + 1;
-		let matrix = Array.from({ length: days }, (_, day) => ({
-			day: getDate(day),
-			events: Array(calendar.displayedHabits.length)
-		}));
+		let flows = state.habits.map(habit => {
+			let events = state.events
+				.filter(event => event.habitId === habit.id);
 
-		let displayerEvents = calendar.events.filter(e =>
-			calendar.displayedHabits.indexOf(e.habitId) !== -1 &&
-			e.date >= calendar.startDate &&
-			e.date <= calendar.endDate
-		);
+			let flow = Array(days).fill(0).map((_, i) => ({
+				ongoingFor: Number.MAX_SAFE_INTEGER,
+				events: [],
+				date: addDays(startDate, i)
+			}));
+			let previousEvents = [];
 
-		for (let event of displayerEvents) {
-			let dayIndex = getDay(event.date);
-			let habitIndex = calendar.displayedHabits.indexOf(event.habitId);
-			let habit = availableHabits.find(h => h.habitId === event.habitId);
+			for (let event of events) {
+				let eventDay = getDaysOffset(startDate, event.timestamp);
 
-			matrix[dayIndex].events[habitIndex] = {
-				kind: 'event',
-				event: {
-					eventColor: habit.color,
-					icon: habit.icon
+				if (eventDay < 0) {
+					previousEvents.push(event);
+					flow[0].ongoingFor = Math.min(
+						flow[0].ongoingFor,
+						-eventDay
+					);
 				}
-			};
-		}
-
-		let inactivities = Array(calendar.displayedHabits.length).fill(-1);
-
-		for (let day of matrix) {
-			for (let habitIndex in inactivities) {
-				let habit = availableHabits.find(h => h.habitId === calendar.displayedHabits[habitIndex]);
-
-				if (day.events[habitIndex] != null)
-					inactivities[habitIndex] = 0;
-				else if (inactivities[habitIndex] === -1) {
-					day.events[habitIndex] = {
-						kind: 'none',
-						placeholder: {
-							habit: habit.habitId
-						}
-					}
-				}
-				else {
-					inactivities[habitIndex]++;
-
-					day.events[habitIndex] = {
-						kind: 'separator',
-						separator: {
-							daysOfInactivity: inactivities[habitIndex],
-							eventColor: habit.color,
-							initialColor: habit.initialColor,
-							finalColor: habit.finalColor,
-							target: habit.target,
-							habit: habit.habitId
-						}
-					}
+				else if (eventDay < days) {
+					flow[eventDay].events.push(event);
+					flow[eventDay].ongoingFor = 0;
 				}
 			}
-		}
 
-		for (let day = getDay(new Date()) + 1; day < matrix.length; day++) {
-			for (let habitKey in matrix[day].events)
-				matrix[day].events[habitKey] = { kind: 'upcoming' };
-		}
+			for (let day = 1; day < flow.length; day++)
+				flow[day].ongoingFor = Math.min(
+					flow[day].ongoingFor,
+					flow[day - 1].ongoingFor + 1
+				);
 
-		return { days: matrix };
+			return {
+				habit: habit,
+				days: flow,
+				previousEvents: previousEvents
+			};
+		});
+
+		return { flows };
 	},
-	dispatch => bindActionCreators(actionCreators, dispatch)
+	dispatch => bindActionCreators({
+		...calendarActionCreater,
+		...eventsActionCreator
+	}, dispatch)
 )(Calendar);

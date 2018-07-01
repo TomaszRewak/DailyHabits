@@ -1,64 +1,36 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component } from 'react'
 
-import CalendarEvent from './CalendarEvent';
-import CalendarSeparator from './CalendarSeparator';
-import CalendarPlaceholder from './CalendarPlaceholder';
-import CalendarUpcoming from './CalendarUpcoming';
+import CalendarEvent from './CalendarEvents'
 
-class CalendarDay extends Component {
+export default class CalendarDay extends Component {
 	constructor(props) {
 		super(props);
 
-		this.onAddEvent = this.onAddEvent.bind(this);
+		this.addEvent = this.addEvent.bind(this);
 	}
 
 	render() {
+		let className = 'calendar-day';
+
+		if (this.props.events.length)
+			className = `${className} with-events`;
+
 		return (
-			<div className="calendar-day">
+			<div className={className}>
+				<div className="add-event-button" onClick={this.addEvent}></div>
 				{
-					//	this.props.day.getDate() == 1 &&
-					//	<div className="calendar-day-label"><div>{`${this.props.day.getDate()} - ${this.props.day.getMonth()}`}</div></div>
+					!!this.props.events.length &&
+					<CalendarEvent
+						events={this.props.events}
+						deleteEvent={this.props.deleteEvent}
+					/>
 				}
-				<div className="calendar-day-body">
-					{
-						this.props.events.map(event => {
-							switch (event.kind) {
-								case 'event':
-									return <CalendarEvent
-										eventColor={event.event.eventColor}
-										icon={event.event.icon}
-									/>;
-								case 'separator':
-									return <CalendarSeparator
-										habit={event.separator.habit}
-										eventColor={event.separator.eventColor}
-										initialColor={event.separator.initialColor}
-										finalColor={event.separator.finalColor}
-										daysOfInactivity={event.separator.daysOfInactivity}
-										target={event.separator.target}
-										onClick={this.onAddEvent}
-									/>;
-								case 'none':
-									return <CalendarPlaceholder
-										habit={event.placeholder.habit}
-										onClick={this.onAddEvent}
-									/>;
-								case 'upcoming':
-									return <CalendarUpcoming />;
-								default:
-									return null;
-							}
-						})
-					}
-				</div>
 			</div>
 		);
 	}
 
-	onAddEvent(habit) {
-		if (this.props.onAddEvent)
-			this.props.onAddEvent(this.props.day, habit);
+	addEvent() {
+		if (this.props.addEvent)
+			this.props.addEvent(this.props.date);
 	}
 }
-
-export default CalendarDay;

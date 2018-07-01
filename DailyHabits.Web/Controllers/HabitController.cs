@@ -18,28 +18,31 @@ namespace DailyHabits.Web.Controllers
 			_habitService = habitService;
 		}
 
-		[HttpPost("create")]
-		public JsonResult Create(CreateHabitRequest request)
+		[HttpPut]
+		public JsonResult Create([FromBody]CreateHabitRequest request)
 		{
 			var response = _habitService.CreateHabit(request);
 
 			return ServiceResponse(response);
 		}
 
-		public JsonResult Edit(EditHabitRequest request)
+		[HttpPost]
+		public JsonResult Edit([FromBody]EditHabitRequest request)
 		{
 			var response = _habitService.EditHabit(request);
 
 			return ServiceResponse(response);
 		}
 
-		public JsonResult Delete(int habitId)
+		[HttpDelete("{id}")]
+		public JsonResult Delete(int id)
 		{
-			var response = _habitService.DeleteHabit(habitId);
+			var response = _habitService.DeleteHabit(id);
 
 			return ServiceResponse(response);
 		}
 
+		[HttpGet]
 		public JsonResult Get()
 		{
 			var response = _habitService.ListHabits();
