@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react'
 
+import { Icon } from 'semantic-ui-react'
+
 export default class CalendarEvent extends Component {
 	constructor(props) {
 		super(props);
@@ -10,7 +12,7 @@ export default class CalendarEvent extends Component {
 	render() {
 		return (
 			<div className="calendar-event">
-				<div class="delete-event-button" onClick={this.deleteEvent}>x</div>
+				<Icon name="trash" onClick={this.deleteEvent}/>
 			</div>
 		);
 	}

@@ -10,6 +10,7 @@ export default class CalendarWorkspace extends Component {
 					this.props.flows.map(flow =>
 						<CalendarFlow
 							key={flow.habit.id}
+							habit={flow.habit}
 							{...flow}
 							addEvent={this.props.addEvent}
 							deleteEvent={this.props.deleteEvent}

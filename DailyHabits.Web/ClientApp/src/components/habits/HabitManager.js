@@ -28,9 +28,8 @@ class HabitManager extends Component {
 						this.props.habits.map(habit =>
 							<HabitManagerItem
 								key={habit.id}
-								id={habit.id}
-								name={habit.name}
-								icon={habit.icon}
+								habit={habit}
+								onChange={this.onChange}
 								onDelete={this.onDelete}
 							/>
 						)
@@ -41,8 +40,8 @@ class HabitManager extends Component {
 		);
 	}
 
-	onChange(habitId, newState) {
-
+	onChange(habit) {
+		this.props.updateHabit(habit);
 	}
 
 	onDelete(habitId) {

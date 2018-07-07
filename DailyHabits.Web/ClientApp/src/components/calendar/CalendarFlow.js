@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 import CalendarDay from './CalendarDay'
+import { Icon } from 'semantic-ui-react';
 
 export default class CalendarFlow extends Component {
 	constructor(props) {
@@ -12,16 +13,25 @@ export default class CalendarFlow extends Component {
 	render() {
 		return (
 			<div className="calendar-flow">
-				{
-					this.props.days.map(day =>
-						<CalendarDay
-							key={day.date}
-							{...day}
-							addEvent={this.addEvent}
-							deleteEvent={this.props.deleteEvent}
-						/>
-					)
-				}
+				<div className="calendar-flow-description">
+					<Icon name={this.props.habit.icon} />
+				</div>
+				<div
+					className="calendar-flow-days"
+					style={{ backgroundColor: this.props.habit.baseColor }}
+				>
+					{
+						this.props.days.map(day =>
+							<CalendarDay
+								key={day.date}
+								habit={this.props.habit}
+								{...day}
+								addEvent={this.addEvent}
+								deleteEvent={this.props.deleteEvent}
+							/>
+						)
+					}
+				</div>
 			</div>
 		);
 	}

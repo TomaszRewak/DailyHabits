@@ -1,36 +1,57 @@
 ﻿import React, { Component } from 'react'
 
-import CalendarEvent from './CalendarEvents'
+import CalendarEvents from './CalendarEvents'
+import CalendarProgress from './CalendarProgress'
+import CalendarMark from './CalendarMark'
 
 export default class CalendarDay extends Component {
 	constructor(props) {
 		super(props);
 
 		this.addEvent = this.addEvent.bind(this);
+		this.deleteFirstEvent = this.deleteFirstEvent.bind(this);
 	}
 
 	render() {
-		let className = 'calendar-day';
-
-		if (this.props.events.length)
-			className = `${className} with-events`;
-
-		return (
-			<div className={className}>
-				<div className="add-event-button" onClick={this.addEvent}></div>
-				{
-					!!this.props.events.length &&
-					<CalendarEvent
+		if (this.props.events.length) {
+			return (
+				<div className="calendar-day with-events">
+					<div className="add-event-button" onClick={this.deleteFirstEvent}>
+						<CalendarMark
+							color={this.props.habit.baseColor}
+							icon={this.props.habit.icon}
+						/>
+					</div>
+					<CalendarEvents
 						events={this.props.events}
 						deleteEvent={this.props.deleteEvent}
 					/>
-				}
-			</div>
-		);
+				</div>
+			);
+		}
+		else {
+			return (
+				<div className="calendar-day with-events">
+					<div className="add-event-button" onClick={this.addEvent}>
+						<CalendarProgress
+							initialColor={this.props.habit.initialColor}
+							finalColor={this.props.habit.finalColor}
+							progress={this.props.ongoingFor}
+							target={14}
+						/>
+					</div>
+				</div>
+			);
+		}
 	}
 
 	addEvent() {
 		if (this.props.addEvent)
 			this.props.addEvent(this.props.date);
+	}
+
+	deleteFirstEvent() {
+		if (this.props.deleteEvent)
+			this.props.deleteEvent(this.props.events[0].id);
 	}
 }

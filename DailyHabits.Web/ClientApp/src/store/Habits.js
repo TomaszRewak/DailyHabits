@@ -48,6 +48,24 @@
 			dispatch({ type: 'DELETE_HABIT', id: id });
 		else
 			dispatch({ type: 'DELETE_HABIT_ERROR' });
+	},
+	updateHabit: (habit) => async (dispatch, getState) => {
+		dispatch({ type: 'UPDATE_HABIT_REQUEST', habit });
+
+		const response = await fetch(
+			'api/habit',
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(habit)
+			}
+		);
+		const result = await response.json();
+
+		if (result.success)
+			dispatch({ type: 'UPDATE_HABIT', habit });
+		else
+			dispatch({ type: 'UPDATE_HABIT_ERROR' });
 	}
 }
 
@@ -63,6 +81,8 @@ export const reducer = (state, action) => {
 			return [...state, action.habit];
 		case 'DELETE_HABIT':
 			return state.filter(habit => habit.id !== action.id);
+		case 'UPDATE_HABIT':
+			return state.map(habit => habit.id === action.habit.id ? action.habit : habit);
 		default:
 			return state;
 	}

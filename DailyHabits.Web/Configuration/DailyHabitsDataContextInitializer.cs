@@ -1,5 +1,6 @@
 ﻿using DailyHabits.Model;
 using DailyHabits.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace DailyHabits.Web.Configuration
 			using (var scope = serviceProvider.CreateScope())
 			using (var context = scope.ServiceProvider.GetRequiredService<DailyHabitsDataContext>())
 			{
+				context.Database.Migrate();
+
 				Seed(context);
 			}
 		}
