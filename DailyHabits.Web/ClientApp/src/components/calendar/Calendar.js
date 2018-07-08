@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators as calendarActionCreater } from '../../store/Calendar';
 import { actionCreators as eventsActionCreator } from '../../store/Events'
+import { actionCreators as habitsActionCreator } from '../../store/Habits'
 import { getDaysOffset, addDays, resetTime } from '../../utils/Date'
 
 import CalendarWorkspace from './CalendarWorkspace'
@@ -18,6 +19,7 @@ class Calendar extends Component {
 	}
 
 	componentWillMount() {
+		this.props.requestHabitData();
 		this.props.setInterval(
 			resetTime(addDays(new Date(), -100)),
 			resetTime(addDays(new Date(), 2))
@@ -30,6 +32,8 @@ class Calendar extends Component {
 				flows={this.props.flows}
 				addEvent={this.addEvent}
 				deleteEvent={this.deleteEvent}
+				onHabitChange={this.props.updateHabit}
+				onHabitDelete={this.props.deleteHabit}
 			/>
 		);
 	}
@@ -97,6 +101,7 @@ export default connect(
 	},
 	dispatch => bindActionCreators({
 		...calendarActionCreater,
-		...eventsActionCreator
+		...eventsActionCreator,
+		...habitsActionCreator
 	}, dispatch)
 )(Calendar);

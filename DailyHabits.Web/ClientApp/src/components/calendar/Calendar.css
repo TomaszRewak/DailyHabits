@@ -1,12 +1,23 @@
-﻿.calendar-workspace {
+﻿body {
 	background-color: gray;
+}
+
+.calendar-workspace {
 	width: 100%;
 	height: 100%;
+
+	padding: 50px 0;
 }
 
 .calendar-flow {
 	margin: 10px;
+	display: flex;
+	align-items: center;
 }
+
+	.calendar-flow .calendar-flow-description {
+		margin-right: 10px;
+	}
 
 	.calendar-flow .calendar-flow-days {
 		display: flex;
@@ -26,9 +37,6 @@
 		width: 100%;
 		height: 100%;
 		padding: 2px 1px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 
 		.calendar-day .add-event-button .calendar-progress {
@@ -38,24 +46,39 @@
 		}
 
 		.calendar-day .add-event-button .calendar-mark {
-			width: 30px;
-			height: 30px;
-			position: absolute;
-			border-radius: 100%;
-			bottom: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			box-shadow: 1px 1px 5px black;
+			width: 100%;
+			height: 100%;
 		}
 
-			.calendar-day .add-event-button .calendar-mark .icon {
-				margin: 0;
+			.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				border-radius: 100%;
+				bottom: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 1px 1px 5px black;
 			}
 
-			.calendar-day:not(:hover) .calendar-events {
-				display: none;
+				.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble .icon {
+					margin: 0;
+				}
+
+			.calendar-day .add-event-button .calendar-mark .calendar-mark-dot {
+				width: 100%;
+				height: 8px;
+				border-radius: 100%;
+				box-shadow: 1px 1px 5px black;
 			}
+
+	.calendar-day:not(:hover) .calendar-events {
+		display: none;
+	}
 
 .calendar-events {
 	position: absolute;

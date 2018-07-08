@@ -18,7 +18,8 @@ export default class CalendarDay extends Component {
 				<div className="calendar-day with-events">
 					<div className="add-event-button" onClick={this.deleteFirstEvent}>
 						<CalendarMark
-							color={this.props.habit.baseColor}
+							flowColor={this.props.habit.baseColor}
+							eventColor={this.props.habit.initialColor}
 							icon={this.props.habit.icon}
 						/>
 					</div>

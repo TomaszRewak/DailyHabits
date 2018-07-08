@@ -1,0 +1,46 @@
+﻿.expandable-icon {
+	width: 30px;
+	height: 30px;
+	position: relative;
+}
+
+	.expandable-icon > .expandable-icon-body {
+		min-width: 100%;
+		min-height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: gray;
+		border-radius: 15px;
+		box-shadow: 1px 1px 5px black;
+	}
+
+		.expandable-icon > .expandable-icon-body > .expendable-icon-header {
+			display: flex;
+			width: 100%;
+		}
+
+			.expandable-icon > .expandable-icon-body > .expendable-icon-header > .icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 30px;
+				min-height: 30px;
+				margin: 0;
+			}
+
+			.expandable-icon > .expandable-icon-body > .expendable-icon-header > .expandable-icon-name {
+				white-space: nowrap;
+				margin: 0 10px;
+				align-self: center;
+				font-weight: bold;
+			}
+
+	.expandable-icon.hovered > .expandable-icon-body,
+	.expandable-icon.selected > .expandable-icon-body {
+		z-index: 1000;
+	}
+
+	.expandable-icon.hovered > .expandable-icon-body {
+		z-index: 1000;
+	}
