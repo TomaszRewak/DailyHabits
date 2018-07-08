@@ -34,6 +34,7 @@ class Calendar extends Component {
 				deleteEvent={this.deleteEvent}
 				onHabitChange={this.props.updateHabit}
 				onHabitDelete={this.props.deleteHabit}
+				createHabit={this.props.createHabit}
 			/>
 		);
 	}

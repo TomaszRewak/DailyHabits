@@ -8,8 +8,8 @@ export default class ExpendableIcon extends Component {
 		super(props);
 
 		this.state = {
-			hovered: true,
-			selected: true
+			hovered: false,
+			selected: false
 		};
 
 		this.mouseEntered = this.mouseEntered.bind(this);

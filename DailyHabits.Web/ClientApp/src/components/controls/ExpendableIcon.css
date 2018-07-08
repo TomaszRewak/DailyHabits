@@ -29,12 +29,21 @@
 				margin: 0;
 			}
 
+			.expandable-icon > .expandable-icon-body > .expendable-icon-header:hover > .icon {
+				background-color: rgba(0,0,0,0.2);
+				border-radius: 100%;
+			}
+
 			.expandable-icon > .expandable-icon-body > .expendable-icon-header > .expandable-icon-name {
 				white-space: nowrap;
 				margin: 0 10px;
 				align-self: center;
 				font-weight: bold;
 			}
+
+		.expandable-icon > .expandable-icon-body > .expandable-icon-content {
+			margin: 20px;
+		}
 
 	.expandable-icon.hovered > .expandable-icon-body,
 	.expandable-icon.selected > .expandable-icon-body {

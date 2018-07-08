@@ -38,7 +38,7 @@ export default class CalendarDay extends Component {
 							initialColor={this.props.habit.initialColor}
 							finalColor={this.props.habit.finalColor}
 							progress={this.props.ongoingFor}
-							target={14}
+							target={this.props.habit.target}
 						/>
 					</div>
 				</div>

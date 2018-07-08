@@ -87,3 +87,7 @@
 	border: 1px solid lightgray;
 	z-index: 100;
 }
+
+.new-habit {
+	margin: 10px;
+}

@@ -3,3 +3,29 @@
 	height: 1em;
 	border-radius: 0.3em;
 }
+
+.habit-configuration {
+	display: flex;
+	flex-direction: column;
+	min-width: 250px;
+}
+
+	.habit-configuration .transition-colors {
+		display: flex;
+	}
+
+		.habit-configuration .transition-colors .dropdown:not(:last-child) {
+			margin-right: 10px;
+		}
+
+	.habit-configuration > .label {
+		background-color: transparent;
+	}
+
+	.habit-configuration > .habit-configuration-options {
+		margin-top: 10px;
+	}
+
+		.habit-configuration > .habit-configuration-options .button {
+			flex: 1;
+		}

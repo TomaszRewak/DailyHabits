@@ -14,7 +14,9 @@ export default class Habit extends Component {
 				<HabitConfiguration
 					habit={this.props.habit}
 					onChange={this.props.onChange}
-					onDelete={this.props.onDelete} />
+					onDelete={this.props.onDelete}
+					onCreate={this.props.onCreate}
+					newHabit={this.props.newHabit} />
 			</ExpendableIcon>
 		);
 	}
