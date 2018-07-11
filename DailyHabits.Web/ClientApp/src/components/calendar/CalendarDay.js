@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react'
 
-import CalendarEvents from './CalendarEvents'
 import CalendarProgress from './CalendarProgress'
 import CalendarMark from './CalendarMark'
 
@@ -16,17 +15,13 @@ export default class CalendarDay extends Component {
 		if (this.props.events.length) {
 			return (
 				<div className="calendar-day with-events">
-					<div className="add-event-button" onClick={this.deleteFirstEvent}>
+					<div className="add-event-button" onDoubleClick={this.deleteFirstEvent}>
 						<CalendarMark
-							flowColor={this.props.habit.baseColor}
-							eventColor={this.props.habit.initialColor}
-							icon={this.props.habit.icon}
+							habit={this.props.habit}
+							events={this.props.events}
+							deleteEvent={this.props.deleteEvent}
 						/>
 					</div>
-					<CalendarEvents
-						events={this.props.events}
-						deleteEvent={this.props.deleteEvent}
-					/>
 				</div>
 			);
 		}

@@ -57,36 +57,27 @@
 				width: 30px;
 				height: 30px;
 				position: absolute;
-				border-radius: 100%;
 				bottom: 100%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				box-shadow: 1px 1px 5px black;
 			}
 
-				.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble .icon {
-					margin: 0;
+				.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble .events-number-indicator {
+					background-color: rgba(0,0,0,0.4);
+					border-radius: 1000px;
+					padding: 2px 5px;
+					font-size: 0.7em;
+					color: rgba(255,255,255,0.9);
+					margin-left: 5px;
 				}
 
-			.calendar-day .add-event-button .calendar-mark .calendar-mark-dot {
-				width: 100%;
-				height: 8px;
-				border-radius: 100%;
-				box-shadow: 1px 1px 5px black;
-			}
-
-	.calendar-day:not(:hover) .calendar-events {
-		display: none;
-	}
-
-.calendar-events {
-	position: absolute;
-	top: 100%;
-	background: white;
-	border: 1px solid lightgray;
-	z-index: 100;
-}
+				.calendar-day .add-event-button .calendar-mark .calendar-mark-dot {
+					width: 100%;
+					height: 8px;
+					border-radius: 100%;
+					box-shadow: 1px 1px 5px black;
+				}
 
 .new-habit {
 	margin: 10px;

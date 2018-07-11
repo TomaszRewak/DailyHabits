@@ -1,7 +1,4 @@
-﻿import React from 'react'
-import { Icon } from 'semantic-ui-react'
-
-const iconOptions = [
+﻿const iconOptions = [
 	'500px',
 	'accessible icon',
 	'accusoft',
