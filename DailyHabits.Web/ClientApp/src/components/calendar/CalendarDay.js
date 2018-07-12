@@ -20,6 +20,7 @@ export default class CalendarDay extends Component {
 							habit={this.props.habit}
 							events={this.props.events}
 							deleteEvent={this.props.deleteEvent}
+							addEvent={this.addEvent}
 						/>
 					</div>
 				</div>

@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react'
 
 import CalendarEvent from './CalendarEvent'
+import { Icon } from 'semantic-ui-react';
 
 export default class CalendarEvents extends Component {
 	render() {
@@ -15,6 +16,9 @@ export default class CalendarEvents extends Component {
 						/>
 					)
 				}
+				<div className="calendar-event">
+					<Icon name="plus" onClick={this.props.addEvent} />
+				</div>
 			</div>
 		);
 	}

@@ -22,6 +22,7 @@ export default class CalendarMark extends Component {
 						<CalendarEvents
 							events={this.props.events}
 							deleteEvent={this.props.deleteEvent}
+							addEvent={this.props.addEvent}
 						/>
 					</ExpendableIcon>
 				</div>
