@@ -13,6 +13,7 @@
 		background-color: gray;
 		border-radius: 15px;
 		box-shadow: 1px 1px 5px black;
+		z-index: 999;
 	}
 
 		.expandable-icon > .expandable-icon-body > .expendable-icon-header {

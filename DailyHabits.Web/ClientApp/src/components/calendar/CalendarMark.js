@@ -1,14 +1,22 @@
-﻿import React, { Component } from 'react'
-import { Icon } from 'semantic-ui-react';
+﻿import React, { Component } from 'react';
 
-import ExpendableIcon from '../controls/ExpendableIcon'
-import CalendarEvents from './CalendarEvents'
+import ExpendableIcon from '../controls/ExpendableIcon';
+import CalendarEvents from './CalendarEvents';
 
 export default class CalendarMark extends Component {
+	constructor(props) {
+		super(props);
+
+		this.deleteFirstEvent = this.deleteFirstEvent.bind(this);
+	}
+
 	render() {
 		return (
 			<div className="calendar-mark" >
-				<div className="calendar-mark-dot" style={{ backgroundColor: this.props.habit.initialColor }} />
+				<div
+					className="calendar-mark-dot"
+					style={{ backgroundColor: this.props.habit.initialColor }}
+					onClick={this.deleteFirstEvent} />
 				<div className="calendar-mark-bubble">
 					<ExpendableIcon
 						icon={this.props.habit.icon}
@@ -20,6 +28,7 @@ export default class CalendarMark extends Component {
 						}
 					>
 						<CalendarEvents
+							date={this.props.habit.date}
 							events={this.props.events}
 							deleteEvent={this.props.deleteEvent}
 							addEvent={this.props.addEvent}
@@ -28,5 +37,10 @@ export default class CalendarMark extends Component {
 				</div>
 			</div>
 		);
+	}
+
+	deleteFirstEvent() {
+		if (this.props.deleteEvent)
+			this.props.deleteEvent(this.props.events[0].id);
 	}
 }

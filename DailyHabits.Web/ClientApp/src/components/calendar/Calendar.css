@@ -5,12 +5,11 @@
 .calendar-workspace {
 	width: 100%;
 	height: 100%;
-
 	padding: 50px 0;
 }
 
 .calendar-flow {
-	margin: 10px;
+	padding: 15px;
 	display: flex;
 	align-items: center;
 }
@@ -57,10 +56,12 @@
 				width: 30px;
 				height: 30px;
 				position: absolute;
-				bottom: 100%;
+				top: 100%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				opacity: 0;
+				transition: opacity 0.5s;
 			}
 
 				.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble .events-number-indicator {
@@ -72,12 +73,65 @@
 					margin-left: 5px;
 				}
 
-				.calendar-day .add-event-button .calendar-mark .calendar-mark-dot {
-					width: 100%;
-					height: 8px;
-					border-radius: 100%;
-					box-shadow: 1px 1px 5px black;
-				}
+			.calendar-day .add-event-button .calendar-mark .calendar-mark-dot {
+				width: 100%;
+				height: 8px;
+				border-radius: 100%;
+				box-shadow: 1px 1px 5px black;
+			}
+
+	.calendar-day .calendar-day-date,
+	.calendar-day .calendar-day-progress {
+		visibility: collapse;
+		transform: rotate(90deg);
+		left: 50%;
+		transform-origin: right;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		color: white;
+		z-index: 50;
+		border-radius: 50px;
+		bottom: 100%;
+		width: 0;
+		position: relative;
+	}
+
+	.calendar-day .calendar-day-date {
+		bottom: 100%;
+	}
+
+	.calendar-day .calendar-day-progress {
+		top: 100%;
+	}
+
+		.calendar-day .calendar-day-date > span,
+		.calendar-day .calendar-day-progress > span {
+			background-color: rgba(0,0,0,0.7);
+			padding: 5px 15px;
+			position: absolute;
+			width: max-content;
+			margin: 0 5px;
+		}
+
+	.calendar-day .calendar-day-date > span {
+		right: 0;
+		border-radius: 50px 0 0 50px;
+	}
+
+	.calendar-day .calendar-day-progress > span {
+		left: 0;
+		border-radius: 0 50px 50px 0;
+	}
+
+	.calendar-day:hover .calendar-day-date,
+	.calendar-day:hover .calendar-day-progress {
+		visibility: visible;
+	}
+
+.calendar-flow:hover .calendar-day .add-event-button .calendar-mark .calendar-mark-bubble {
+	opacity: 1;
+}
 
 .new-habit {
 	margin: 10px;

@@ -2,20 +2,21 @@
 
 import CalendarProgress from './CalendarProgress'
 import CalendarMark from './CalendarMark'
+import CalendarDayDate from './CalendarDayDate'
+import CalendarDayProgress from './CalendarDayProgress'
 
 export default class CalendarDay extends Component {
 	constructor(props) {
 		super(props);
 
 		this.addEvent = this.addEvent.bind(this);
-		this.deleteFirstEvent = this.deleteFirstEvent.bind(this);
 	}
 
 	render() {
 		if (this.props.events.length) {
 			return (
 				<div className="calendar-day with-events">
-					<div className="add-event-button" onDoubleClick={this.deleteFirstEvent}>
+					<div className="add-event-button">
 						<CalendarMark
 							habit={this.props.habit}
 							events={this.props.events}
@@ -23,12 +24,14 @@ export default class CalendarDay extends Component {
 							addEvent={this.addEvent}
 						/>
 					</div>
+					<CalendarDayDate date={this.props.date} />
 				</div>
 			);
 		}
 		else {
 			return (
-				<div className="calendar-day with-events">
+				<div className="calendar-day">
+					<CalendarDayProgress progress={this.props.ongoingFor} />
 					<div className="add-event-button" onClick={this.addEvent}>
 						<CalendarProgress
 							initialColor={this.props.habit.initialColor}
@@ -37,6 +40,7 @@ export default class CalendarDay extends Component {
 							target={this.props.habit.target}
 						/>
 					</div>
+					<CalendarDayDate date={this.props.date} />
 				</div>
 			);
 		}
@@ -45,10 +49,5 @@ export default class CalendarDay extends Component {
 	addEvent() {
 		if (this.props.addEvent)
 			this.props.addEvent(this.props.date);
-	}
-
-	deleteFirstEvent() {
-		if (this.props.deleteEvent)
-			this.props.deleteEvent(this.props.events[0].id);
 	}
 }
