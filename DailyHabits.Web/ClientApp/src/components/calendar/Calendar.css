@@ -95,6 +95,7 @@
 		bottom: 100%;
 		width: 0;
 		position: relative;
+		pointer-events: none;
 	}
 
 	.calendar-day .calendar-day-date {

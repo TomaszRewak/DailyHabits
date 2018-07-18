@@ -2,8 +2,12 @@
 
 export const actionCreators = {
 	setInterval: (startDate, endDate) => (dispatch, getState) => {
-		dispatch({ type: 'SET_INTERVAL', interval: { startDate, endDate } });
+		if (!startDate)
+			startDate = getState().calendar.startDate;
+		if (!endDate)
+			endDate = getState().calendar.endDate;
 
+		dispatch({ type: 'SET_INTERVAL', interval: { startDate, endDate } });
 		eventActionCreators.requestEventData(startDate, endDate)(dispatch, getState);
 	}
 };

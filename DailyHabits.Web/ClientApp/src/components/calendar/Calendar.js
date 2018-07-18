@@ -22,7 +22,7 @@ class Calendar extends Component {
 		this.props.requestHabitData();
 		this.props.setInterval(
 			resetTime(addDays(new Date(), -100)),
-			resetTime(addDays(new Date(), 2))
+			resetTime(addDays(new Date(), 5))
 		);
 	}
 
