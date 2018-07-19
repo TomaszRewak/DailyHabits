@@ -72,7 +72,7 @@ export default connect(
 					previousEvents.push(event);
 					flow[days - 1].ongoingFor = Math.min(
 						flow[days - 1].ongoingFor,
-						eventDay - days
+						eventDay - days + 1
 					);
 				}
 				else if (eventDay < days) {

@@ -89,7 +89,7 @@ namespace DailyHabits.Services.Events
 				.Events
 				.Where(e => e.Habit.UserId == authResponse.Payload)
 				.Where(e => e.Timestamep < date)
-				.OrderBy(e => e.Timestamep)
+				.OrderByDescending(e => e.Timestamep)
 				.Select(e => new GetEventResponse
 				{
 					Id = e.Id,

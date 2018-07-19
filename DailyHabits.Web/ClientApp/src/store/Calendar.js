@@ -18,7 +18,7 @@ export const actionCreators = {
 
 const initialState = {
 	date: moment().utc().startOf('day').add({ days: 2 }),
-	days: 100,
+	days: 300,
 	daysGrouping: 1,
 	currentDate: moment().utc().startOf('day')
 }

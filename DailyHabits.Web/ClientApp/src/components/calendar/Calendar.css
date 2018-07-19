@@ -66,12 +66,13 @@
 				width: 30px;
 				height: 30px;
 				position: absolute;
-				top: 100%;
+				bottom: 100%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				opacity: 0;
+				opacity: 0.4;
 				transition: opacity 0.5s;
+				z-index: 200;
 			}
 
 				.calendar-day .add-event-button .calendar-mark .calendar-mark-bubble .events-number-indicator {
@@ -88,6 +89,7 @@
 				height: 8px;
 				border-radius: 100%;
 				box-shadow: 1px 1px 5px black;
+				border: 2px solid black;
 			}
 
 	.calendar-day .calendar-day-date,
@@ -110,11 +112,11 @@
 	}
 
 	.calendar-day .calendar-day-date {
-		bottom: 100%;
+		top: 100%;
 	}
 
 	.calendar-day .calendar-day-progress {
-		top: 100%;
+		bottom: 100%;
 	}
 
 		.calendar-day .calendar-day-date > span,
@@ -130,15 +132,15 @@
 		}
 
 	.calendar-day .calendar-day-date > span {
-		right: 0;
-		border-radius: 50px 0 0 50px;
-		border-right-width: 0;
-	}
-
-	.calendar-day .calendar-day-progress > span {
 		left: 0;
 		border-radius: 0 50px 50px 0;
 		border-left-width: 0;
+	}
+
+	.calendar-day .calendar-day-progress > span {
+		right: 0;
+		border-radius: 50px 0 0 50px;
+		border-right-width: 0;
 	}
 
 	.calendar-day:hover .calendar-day-date,
@@ -151,9 +153,10 @@
 		margin: 0;
 	}
 
-	.calendar-flow:hover .calendar-day .add-event-button .calendar-mark .calendar-mark-bubble {
-		opacity: 1;
-	}
+.calendar-flow .calendar-day:hover .add-event-button .calendar-mark .calendar-mark-bubble {
+	opacity: 1;
+	z-index: 201;
+}
 
 .new-habit {
 	margin: 10px;
