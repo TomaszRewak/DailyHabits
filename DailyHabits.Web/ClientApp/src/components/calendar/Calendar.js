@@ -58,8 +58,6 @@ export default connect(
 			let events = state.events
 				.filter(event => event.habitId === habit.id);
 
-			console.dir(events);
-
 			let flow = Array(days).fill(0).map((_, i) => ({
 				ongoingFor: Number.MAX_SAFE_INTEGER,
 				events: [],
@@ -68,15 +66,13 @@ export default connect(
 			let previousEvents = [];
 
 			for (let event of events) {
-				let eventDay = endDate.diff(moment(event.timestamp).startOf('day'), 'days');
+				let eventDay = endDate.diff(event.timestamp.startOf('day'), 'days');
 
-				console.dir(eventDay)
-
-				if (eventDay < 0) {
+				if (eventDay >= days) {
 					previousEvents.push(event);
-					flow[0].ongoingFor = Math.min(
-						flow[0].ongoingFor,
-						-eventDay
+					flow[days - 1].ongoingFor = Math.min(
+						flow[days - 1].ongoingFor,
+						eventDay - days
 					);
 				}
 				else if (eventDay < days) {
@@ -85,10 +81,10 @@ export default connect(
 				}
 			}
 
-			for (let day = 1; day < flow.length; day++)
+			for (let day = days - 2; day >= 0; day--)
 				flow[day].ongoingFor = Math.min(
 					flow[day].ongoingFor,
-					flow[day - 1].ongoingFor + 1
+					flow[day + 1].ongoingFor + 1
 				);
 
 			return {

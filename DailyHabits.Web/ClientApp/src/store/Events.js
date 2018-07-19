@@ -1,4 +1,6 @@
-﻿export const actionCreators = {
+﻿import moment from 'moment'
+
+export const actionCreators = {
 	requestEventData: (startDate, endDate) => async (dispatch, getState) => {
 		const state = getState();
 		const startDate = state.calendar.date.clone().add({ days: -state.calendar.days });
@@ -19,7 +21,7 @@
 				type: 'GET_EVENTS',
 				events: result.payload.map(event => ({
 					...event,
-					timestamp: new Date(event.timestamp)
+					timestamp: moment.utc(event.timestamp)
 				}))
 			});
 		else

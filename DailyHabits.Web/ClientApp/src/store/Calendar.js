@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export const actionCreators = {
 	setDate: date => (dispatch, getState) => {
-		dispatch({ type: 'SET_DATE', date: date.clone().startOf('day') });
+		dispatch({ type: 'SET_DATE', date: date.clone().utc().startOf('day') });
 		eventActionCreators.requestEventData()(dispatch, getState);
 	},
 	setDays: days => (dispatch, getState) => {
@@ -17,10 +17,10 @@ export const actionCreators = {
 };
 
 const initialState = {
-	date: moment().startOf('day').clone().add({ days: 2 }),
+	date: moment().utc().startOf('day').add({ days: 2 }),
 	days: 100,
 	daysGrouping: 1,
-	currentDate: moment().startOf('day')
+	currentDate: moment().utc().startOf('day')
 }
 
 export const reducer = (state, action) => {

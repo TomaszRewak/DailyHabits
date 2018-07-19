@@ -1,3 +1,7 @@
+body {
+	overflow-x: auto;
+}
+
 .selection.fitted .menu .item {
 	padding: 0 !important;
 }

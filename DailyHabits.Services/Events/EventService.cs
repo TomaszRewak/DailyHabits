@@ -78,8 +78,36 @@ namespace DailyHabits.Services.Events
 			return Success();
 		}
 
+		public ServiceResponse<IEnumerable<GetEventResponse>> GetLastEventBefore(DateTime date)
+		{
+			var authResponse = _authService.GetCurrentUserId();
+
+			if (authResponse.Failure)
+				return Failure<IEnumerable<GetEventResponse>>();
+
+			var element = _dataContext
+				.Events
+				.Where(e => e.Habit.UserId == authResponse.Payload)
+				.Where(e => e.Timestamep < date)
+				.OrderBy(e => e.Timestamep)
+				.Select(e => new GetEventResponse
+				{
+					Id = e.Id,
+					HabitId = e.HabitId,
+					Timestamp = e.Timestamep
+				})
+				.GroupBy(e => e.HabitId)
+				.Select(e => e.FirstOrDefault())
+				.ToList()
+				.Where(e => e != null);
+
+			return Success(element);
+		}
+
 		public ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to)
 		{
+			to = to.AddDays(1);
+
 			var authResponse = _authService.GetCurrentUserId();
 
 			if (authResponse.Failure)
@@ -95,10 +123,14 @@ namespace DailyHabits.Services.Events
 					HabitId = e.HabitId,
 					Timestamp = e.Timestamep
 				})
-				.ToList()
-				.AsEnumerable();
+				.ToList();
 
-			return Success(list);
+			var lastBeforeResponse = GetLastEventBefore(from);
+
+			if (lastBeforeResponse.Success)
+				list.AddRange(lastBeforeResponse.Payload);
+
+			return Success(list.AsEnumerable());
 		}
 	}
 }
