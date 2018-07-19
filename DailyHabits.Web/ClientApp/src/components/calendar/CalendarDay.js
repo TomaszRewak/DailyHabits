@@ -37,7 +37,7 @@ export default class CalendarDay extends Component {
 		else {
 			return (
 				<div className={className}>
-					<CalendarDayProgress progress={this.props.ongoingFor} />
+					<CalendarDayProgress progress={this.props.ongoingFor} target={this.props.habit.target} />
 					<div className="add-event-button" onClick={this.addEvent}>
 						<CalendarProgress
 							initialColor={this.props.habit.initialColor}

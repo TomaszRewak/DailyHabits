@@ -153,6 +153,11 @@
 		margin: 0;
 	}
 
+	.calendar-day .calendar-day-progress > span > .calendar-day-progress-target {
+		opacity: 0.5;
+		font-size: 0.7em;
+	}
+
 .calendar-flow .calendar-day:hover .add-event-button .calendar-mark .calendar-mark-bubble {
 	display: initial;
 }
