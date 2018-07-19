@@ -1,5 +1,6 @@
 body {
 	overflow-x: auto;
+	font-family: 'Nunito', sans-serif;
 }
 
 .selection.fitted .menu .item {

@@ -22,7 +22,6 @@ export default class CalendarDay extends Component {
 
 			return (
 				<div className={className}>
-					<CalendarDayDate date={this.props.date} />
 					<div className="add-event-button">
 						<CalendarMark
 							habit={this.props.habit}
@@ -31,13 +30,14 @@ export default class CalendarDay extends Component {
 							addEvent={this.addEvent}
 						/>
 					</div>
+					<CalendarDayDate date={this.props.date} />
 				</div>
 			);
 		}
 		else {
 			return (
 				<div className={className}>
-					<CalendarDayDate date={this.props.date} />
+					<CalendarDayProgress progress={this.props.ongoingFor} />
 					<div className="add-event-button" onClick={this.addEvent}>
 						<CalendarProgress
 							initialColor={this.props.habit.initialColor}
@@ -46,7 +46,7 @@ export default class CalendarDay extends Component {
 							target={this.props.habit.target}
 						/>
 					</div>
-					<CalendarDayProgress progress={this.props.ongoingFor} />
+					<CalendarDayDate date={this.props.date} />
 				</div>
 			);
 		}
