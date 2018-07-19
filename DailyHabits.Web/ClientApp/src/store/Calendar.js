@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export const actionCreators = {
 	setDate: date => (dispatch, getState) => {
-		dispatch({ type: 'SET_DATE', date });
+		dispatch({ type: 'SET_DATE', date: date.clone().startOf('day') });
 		eventActionCreators.requestEventData()(dispatch, getState);
 	},
 	setDays: days => (dispatch, getState) => {

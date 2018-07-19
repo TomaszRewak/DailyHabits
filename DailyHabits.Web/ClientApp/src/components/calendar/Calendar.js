@@ -52,8 +52,7 @@ class Calendar extends Component {
 export default connect(
 	(state) => {
 		const days = state.calendar.days;
-
-		const startDate = state.calendar.date.clone().add({ days: -days });
+		const endDate = state.calendar.date;
 
 		let flows = state.habits.map(habit => {
 			let events = state.events
@@ -64,12 +63,12 @@ export default connect(
 			let flow = Array(days).fill(0).map((_, i) => ({
 				ongoingFor: Number.MAX_SAFE_INTEGER,
 				events: [],
-				date: startDate.clone().add({ days: i })
+				date: endDate.clone().add({ days: -i })
 			}));
 			let previousEvents = [];
 
 			for (let event of events) {
-				let eventDay = moment(event.timestamp).startOf('day').diff(startDate, 'days');
+				let eventDay = endDate.diff(moment(event.timestamp).startOf('day'), 'days');
 
 				console.dir(eventDay)
 
@@ -94,7 +93,7 @@ export default connect(
 
 			return {
 				habit: habit,
-				days: flow.reverse(),
+				days: flow,
 				previousEvents: previousEvents
 			};
 		});

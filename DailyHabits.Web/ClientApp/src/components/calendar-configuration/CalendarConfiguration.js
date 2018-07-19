@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/Calendar'
+import moment from 'moment'
 
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
@@ -12,25 +13,19 @@ class CalendarConfiguration extends Component {
 	constructor(props) {
 		super(props);
 
-		this.onStartDateChange = this.onStartDateChange.bind(this);
-		this.onEndDateChange = this.onEndDateChange.bind(this);
+		this.ondateChange = this.ondateChange.bind(this);
 	}
 
 	render() {
 		return (
 			<div>
-				<DayPickerInput value={this.props.startDate} onDayChange={this.onStartDateChange} />
-				<DayPickerInput value={this.props.endDate} onDayChange={this.onEndDateChange} />
+				<DayPickerInput value={this.props.date.toDate()} onDayChange={this.ondateChange} />
 			</div>
 		);
 	}
 
-	onStartDateChange(day) {
-		this.props.setInterval(day, null);
-	}
-
-	onEndDateChange(day) {
-		this.props.setInterval(null, day);
+	ondateChange(day) {
+		this.props.setDate(moment(day), null);
 	}
 }
 
