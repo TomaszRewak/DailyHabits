@@ -27,6 +27,7 @@ class Calendar extends Component {
 		return (
 			<CalendarWorkspace
 				flows={this.props.flows}
+				currentDate={this.props.currentDate}
 				addEvent={this.addEvent}
 				deleteEvent={this.deleteEvent}
 				onHabitChange={this.props.updateHabit}
@@ -93,12 +94,15 @@ export default connect(
 
 			return {
 				habit: habit,
-				days: flow,
+				days: flow.reverse(),
 				previousEvents: previousEvents
 			};
 		});
 
-		return { flows };
+		return {
+			flows,
+			currentDate: state.calendar.currentDate
+		};
 	},
 	dispatch => bindActionCreators({
 		...calendarActionCreater,

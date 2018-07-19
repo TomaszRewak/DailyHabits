@@ -5,7 +5,7 @@ export default class CalendarProgress extends Component {
 		const initialColor = `${this.props.initialColor} ${-(this.props.progress - 1) * 100}%`;
 		const finalColor = `${this.props.finalColor} ${(this.props.target - this.props.progress + 1) * 100}%`;
 
-		const progressColor = `linear-gradient(to right, ${initialColor}, ${finalColor})`;
+		const progressColor = `linear-gradient(to left, ${initialColor}, ${finalColor})`;
 
 		return (
 			<div className="calendar-progress" style={{ background: progressColor }} />

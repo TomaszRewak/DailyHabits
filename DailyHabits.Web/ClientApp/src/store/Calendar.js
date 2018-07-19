@@ -19,7 +19,8 @@ export const actionCreators = {
 const initialState = {
 	date: moment().startOf('day').clone().add({ days: 2 }),
 	days: 100,
-	daysGrouping: 1
+	daysGrouping: 1,
+	currentDate: moment().startOf('day')
 }
 
 export const reducer = (state, action) => {

@@ -22,7 +22,7 @@ export default class CalendarFlow extends Component {
 				/>
 				<div
 					className="calendar-flow-days"
-					style={{ backgroundColor: this.props.habit.baseColor }}
+					style={{ borderColor: this.props.habit.baseColor }}
 				>
 					{
 						this.props.days.map(day =>
@@ -30,6 +30,7 @@ export default class CalendarFlow extends Component {
 								key={day.date}
 								habit={this.props.habit}
 								{...day}
+								isCurrentDate={day.date.isSame(this.props.currentDate, 'day')}
 								addEvent={this.addEvent}
 								deleteEvent={this.props.deleteEvent}
 							/>

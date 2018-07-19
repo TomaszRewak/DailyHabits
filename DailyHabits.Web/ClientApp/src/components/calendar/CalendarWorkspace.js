@@ -28,6 +28,7 @@ export default class CalendarWorkspace extends Component {
 							key={flow.habit.id}
 							habit={flow.habit}
 							{...flow}
+							currentDate={this.props.currentDate}
 							addEvent={this.props.addEvent}
 							deleteEvent={this.props.deleteEvent}
 							onHabitChange={this.props.onHabitChange}

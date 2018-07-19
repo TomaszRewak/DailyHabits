@@ -13,9 +13,15 @@ export default class CalendarDay extends Component {
 	}
 
 	render() {
+		let className = 'calendar-day';
+		if (this.props.isCurrentDate)
+			className += ' current-date';
+
 		if (this.props.events.length) {
+			className += ' with-events';
+
 			return (
-				<div className="calendar-day with-events">
+				<div className={className}>
 					<div className="add-event-button">
 						<CalendarMark
 							habit={this.props.habit}
@@ -30,7 +36,7 @@ export default class CalendarDay extends Component {
 		}
 		else {
 			return (
-				<div className="calendar-day">
+				<div className={className}>
 					<CalendarDayProgress progress={this.props.ongoingFor} />
 					<div className="add-event-button" onClick={this.addEvent}>
 						<CalendarProgress
