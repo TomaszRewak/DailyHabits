@@ -1,20 +1,24 @@
 ﻿import { actionCreators as eventActionCreators } from './Events'
+import moment from 'moment'
 
 export const actionCreators = {
-	setInterval: (startDate, endDate) => (dispatch, getState) => {
-		if (!startDate)
-			startDate = getState().calendar.startDate;
-		if (!endDate)
-			endDate = getState().calendar.endDate;
-
-		dispatch({ type: 'SET_INTERVAL', interval: { startDate, endDate } });
-		eventActionCreators.requestEventData(startDate, endDate)(dispatch, getState);
+	setDate: date => (dispatch, getState) => {
+		dispatch({ type: 'SET_DATE', date });
+		eventActionCreators.requestEventData()(dispatch, getState);
+	},
+	setDays: days => (dispatch, getState) => {
+		dispatch({ type: 'SET_DAYS', days });
+		eventActionCreators.requestEventData()(dispatch, getState);
+	},
+	setDaysGrouping: daysGrouping => (dispatch, getState) => {
+		dispatch({ type: 'SET_DAYS_GROUPING', daysGrouping });
+		eventActionCreators.requestEventData()(dispatch, getState);
 	}
 };
 
 const initialState = {
-	startDate: new Date(),
-	endDate: new Date(),
+	date: moment().startOf('day').clone().add({ days: 2 }),
+	days: 100,
 	daysGrouping: 1
 }
 
@@ -22,10 +26,20 @@ export const reducer = (state, action) => {
 	state = state || initialState;
 
 	switch (action.type) {
-		case 'SET_INTERVAL':
+		case 'SET_DATE':
 			return {
 				...state,
-				...action.interval
+				date: action.date
+			};
+		case 'SET_DAYS':
+			return {
+				...state,
+				days: action.days
+			};
+		case 'SET_DAYS_GROUPING':
+			return {
+				...state,
+				daysGrouping: action.daysGrouping
 			}
 		default:
 			return state;

@@ -1,5 +1,9 @@
 ﻿export const actionCreators = {
 	requestEventData: (startDate, endDate) => async (dispatch, getState) => {
+		const state = getState();
+		const startDate = state.calendar.date.clone().add({ days: -state.calendar.days });
+		const endDate = state.calendar.date;
+
 		dispatch({ type: 'GET_EVENTS_REQUEST' });
 
 		const response = await fetch(

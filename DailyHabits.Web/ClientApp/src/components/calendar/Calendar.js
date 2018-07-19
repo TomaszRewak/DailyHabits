@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import moment from 'moment'
 import { connect } from 'react-redux';
 import { actionCreators as calendarActionCreater } from '../../store/Calendar';
 import { actionCreators as eventsActionCreator } from '../../store/Events'
 import { actionCreators as habitsActionCreator } from '../../store/Habits'
-import { getDaysOffset, addDays, resetTime } from '../../utils/Date'
 
 import CalendarWorkspace from './CalendarWorkspace'
 
@@ -20,10 +20,7 @@ class Calendar extends Component {
 
 	componentWillMount() {
 		this.props.requestHabitData();
-		this.props.setInterval(
-			resetTime(addDays(new Date(), -100)),
-			resetTime(addDays(new Date(), 5))
-		);
+		this.props.requestEventData();
 	}
 
 	render() {
@@ -53,24 +50,27 @@ class Calendar extends Component {
 
 export default connect(
 	(state) => {
-		const startDate = state.calendar.startDate;
-		const endDate = state.calendar.endDate;
+		const days = state.calendar.days;
 
-		const days = getDaysOffset(startDate, endDate);
+		const startDate = state.calendar.date.clone().add({ days: -days });
 
 		let flows = state.habits.map(habit => {
 			let events = state.events
 				.filter(event => event.habitId === habit.id);
 
+			console.dir(events);
+
 			let flow = Array(days).fill(0).map((_, i) => ({
 				ongoingFor: Number.MAX_SAFE_INTEGER,
 				events: [],
-				date: addDays(startDate, i)
+				date: startDate.clone().add({ days: i })
 			}));
 			let previousEvents = [];
 
 			for (let event of events) {
-				let eventDay = getDaysOffset(startDate, event.timestamp);
+				let eventDay = moment(event.timestamp).startOf('day').diff(startDate, 'days');
+
+				console.dir(eventDay)
 
 				if (eventDay < 0) {
 					previousEvents.push(event);
