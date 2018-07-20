@@ -1,0 +1,70 @@
+﻿.calendar-day .calendar-day-date,
+.calendar-day .calendar-day-progress {
+	visibility: collapse;
+	transform: rotate(-90deg);
+	left: 50%;
+	transform-origin: right;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: white;
+	z-index: 50;
+	border-radius: 50px;
+	width: 0;
+	position: relative;
+	pointer-events: none;
+	border-color: inherit;
+}
+
+.calendar-day .calendar-day-date {
+	top: 0;
+}
+
+.calendar-day .calendar-day-progress {
+	bottom: 0;
+}
+
+	.calendar-day .calendar-day-date > span,
+	.calendar-day .calendar-day-progress > span {
+		background-color: rgba(0,0,0,0.7);
+		padding: 3px 15px;
+		position: absolute;
+		width: max-content;
+		margin: 0 3px;
+		border: 2px solid;
+		border-color: inherit;
+		background-color: rgb(89, 89, 89);
+		font-size: 0.9em;
+		font-style: italic;
+	}
+
+.calendar-day .calendar-day-date > span {
+	right: 0;
+	border-radius: 50px 0 0 50px;
+	border-right-width: 0;
+}
+
+.calendar-day .calendar-day-progress > span {
+	left: 0;
+	border-radius: 0 50px 50px 0;
+	border-left-width: 0;
+}
+
+.calendar-day:hover .calendar-day-date,
+.calendar-day:hover .calendar-day-progress {
+	visibility: visible;
+}
+
+.calendar-day.current-date .calendar-day-date > span,
+.calendar-day.current-date .calendar-day-progress > span {
+	margin: 0;
+}
+
+.calendar-day .calendar-day-progress > span > .calendar-day-progress-target {
+	opacity: 0.5;
+	font-size: 0.7em;
+}
+
+.calendar-day:hover .add-event-button .calendar-mark .calendar-mark-bubble {
+	display: initial;
+}

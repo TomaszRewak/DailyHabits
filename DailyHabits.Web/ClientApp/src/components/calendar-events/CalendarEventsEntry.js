@@ -2,7 +2,7 @@
 
 import { Icon } from 'semantic-ui-react'
 
-export default class CalendarEvent extends Component {
+export default class CalendarEventsEntry extends Component {
 	constructor(props) {
 		super(props);
 

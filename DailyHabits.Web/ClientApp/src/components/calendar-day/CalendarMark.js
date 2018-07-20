@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 import ExpendableIcon from '../controls/ExpendableIcon';
-import CalendarEvents from './CalendarEvents';
+import CalendarEvents from '../calendar-events/CalendarEvents';
 
 export default class CalendarMark extends Component {
 	constructor(props) {

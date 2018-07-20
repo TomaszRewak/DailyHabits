@@ -5,11 +5,12 @@ export const actionCreators = {
 		const state = getState();
 		const startDate = state.calendar.date.clone().add({ days: -state.calendar.days });
 		const endDate = state.calendar.date;
+		const influenceWindow = state.calendar.influenceWindow;
 
 		dispatch({ type: 'GET_EVENTS_REQUEST' });
 
 		const response = await fetch(
-			`api/event?from=${startDate.toJSON()}&to=${endDate.toJSON()}`,
+			`api/event?from=${startDate.toJSON()}&to=${endDate.toJSON()}&window=${influenceWindow}`,
 			{
 				method: 'GET'
 			}

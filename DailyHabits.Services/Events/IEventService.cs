@@ -11,6 +11,6 @@ namespace DailyHabits.Services.Events
 
 		ServiceResponse DeleteEvent(int eventId);
 
-		ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to);
+		ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to, int window = 1);
     }
 }

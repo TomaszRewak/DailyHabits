@@ -35,9 +35,9 @@ namespace DailyHabits.Web.Controllers
 		}
 
 		[HttpGet]
-		public JsonResult Get(DateTime from, DateTime to)
+		public JsonResult Get(DateTime from, DateTime to, int window = 1)
 		{
-			var response = _eventService.ListEvents(from, to);
+			var response = _eventService.ListEvents(from, to, window);
 
 			return ServiceResponse(response);
 		}

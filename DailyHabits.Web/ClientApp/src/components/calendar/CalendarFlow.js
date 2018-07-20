@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 
-import CalendarDay from './CalendarDay'
+import CalendarDay from '../calendar-day/CalendarDay'
 
 import Habit from '../habits/Habit'
 
@@ -30,6 +30,7 @@ export default class CalendarFlow extends Component {
 								key={day.date}
 								habit={this.props.habit}
 								{...day}
+								maxTargetEvents={this.props.maxTargetEvents}
 								isCurrentDate={day.date.isSame(this.props.currentDate, 'day')}
 								addEvent={this.addEvent}
 								deleteEvent={this.props.deleteEvent}

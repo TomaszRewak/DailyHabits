@@ -1,9 +1,13 @@
 ﻿import React, { Component } from 'react'
 
+import './CalendarDay.css'
+
 import CalendarProgress from './CalendarProgress'
 import CalendarMark from './CalendarMark'
-import CalendarDayDate from './CalendarDayDate'
-import CalendarDayProgress from './CalendarDayProgress'
+import CalendarDayDate from '../calendar-day-label/CalendarDayLabelDate'
+import CalendarDayProgress from '../calendar-day-label/CalendarDayLabelProgress'
+import CalendarDayAccumulatedProgress from '../calendar-day-label/CalendarDayLabelAccumulatedProgress';
+import CalendarDayLabelAccumulatedProgress from '../calendar-day-label/CalendarDayLabelAccumulatedProgress';
 
 export default class CalendarDay extends Component {
 	constructor(props) {
@@ -22,6 +26,7 @@ export default class CalendarDay extends Component {
 
 			return (
 				<div className={className}>
+					{this.renderAccumulatedProgress()}
 					<div className="add-event-button">
 						<CalendarMark
 							habit={this.props.habit}
@@ -38,6 +43,7 @@ export default class CalendarDay extends Component {
 			return (
 				<div className={className}>
 					<CalendarDayProgress progress={this.props.ongoingFor} target={this.props.habit.target} />
+					{this.renderAccumulatedProgress()}
 					<div className="add-event-button" onClick={this.addEvent}>
 						<CalendarProgress
 							initialColor={this.props.habit.initialColor}
@@ -50,6 +56,14 @@ export default class CalendarDay extends Component {
 				</div>
 			);
 		}
+	}
+
+	renderAccumulatedProgress() {
+		console.dir(this.props);
+		return <CalendarDayLabelAccumulatedProgress
+			accumulatedTargetEvents={this.props.accumulatedTargetEvents}
+			maxTargetEvents={this.props.maxTargetEvents}
+		/>
 	}
 
 	addEvent() {

@@ -53,44 +53,58 @@ export default connect(
 	(state) => {
 		const days = state.calendar.days;
 		const endDate = state.calendar.date;
+		const influenceWindow = state.calendar.influenceWindow;
 
 		let flows = state.habits.map(habit => {
-			let events = state.events
+			const events = state.events
 				.filter(event => event.habitId === habit.id);
+			const flowDays = days + habit.target;
 
-			let flow = Array(days).fill(0).map((_, i) => ({
+			let flow = Array(flowDays).fill(0).map((_, i) => ({
 				ongoingFor: Number.MAX_SAFE_INTEGER,
 				events: [],
-				date: endDate.clone().add({ days: -i })
+				date: endDate.clone().add({ days: -i }),
+				accumulatedTargetEvents: 0,
 			}));
 			let previousEvents = [];
 
 			for (let event of events) {
 				let eventDay = endDate.diff(event.timestamp.startOf('day'), 'days');
 
-				if (eventDay >= days) {
+				if (eventDay >= flowDays) {
 					previousEvents.push(event);
-					flow[days - 1].ongoingFor = Math.min(
-						flow[days - 1].ongoingFor,
-						eventDay - days + 1
+					flow[flowDays - 1].ongoingFor = Math.min(
+						flow[flowDays - 1].ongoingFor,
+						eventDay - flowDays + 1
 					);
 				}
-				else if (eventDay < days) {
+				else if (eventDay < flowDays) {
 					flow[eventDay].events.push(event);
 					flow[eventDay].ongoingFor = 0;
 				}
 			}
 
-			for (let day = days - 2; day >= 0; day--)
+			for (let day = flowDays - 2; day >= 0; day--)
 				flow[day].ongoingFor = Math.min(
 					flow[day].ongoingFor,
 					flow[day + 1].ongoingFor + 1
 				);
 
+			for (let day = flowDays - 1; day >= 0; day--) {
+				flow[day].accumulatedTargetEvents = flow[day].events.length;
+
+				if (day + 1 < flowDays)
+					flow[day].accumulatedTargetEvents += flow[day + 1].accumulatedTargetEvents;
+
+				if (day + habit.target * influenceWindow < flowDays)
+					flow[day].accumulatedTargetEvents -= flow[day + habit.target * influenceWindow].events.length;
+			}
+
 			return {
 				habit: habit,
-				days: flow,
-				previousEvents: previousEvents
+				days: flow.slice(0, days),
+				previousEvents: previousEvents,
+				maxTargetEvents: Math.max(...flow.map(day => day.accumulatedTargetEvents))
 			};
 		});
 

@@ -104,7 +104,29 @@ namespace DailyHabits.Services.Events
 			return Success(element);
 		}
 
-		public ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to)
+		public ServiceResponse<IEnumerable<GetEventResponse>> GetInfluencingEvents(DateTime before, int window = 1)
+		{
+			var authResponse = _authService.GetCurrentUserId();
+
+			if (authResponse.Failure)
+				return Failure<IEnumerable<GetEventResponse>>();
+
+			var list = _dataContext
+				.Events
+				.Where(e => e.Habit.UserId == authResponse.Payload)
+				.Where(e => e.Timestamep < before && e.Timestamep >= before.AddDays(-window * e.Habit.Target))
+				.Select(e => new GetEventResponse
+				{
+					Id = e.Id,
+					HabitId = e.HabitId,
+					Timestamp = e.Timestamep
+				})
+				.ToList();
+
+			return Success(list.AsEnumerable());
+		}
+
+		public ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to, int window = 1)
 		{
 			to = to.AddDays(1);
 
@@ -126,9 +148,17 @@ namespace DailyHabits.Services.Events
 				.ToList();
 
 			var lastBeforeResponse = GetLastEventBefore(from);
+			var influencingEvents = GetInfluencingEvents(from, window);
 
-			if (lastBeforeResponse.Success)
-				list.AddRange(lastBeforeResponse.Payload);
+			if (lastBeforeResponse.Success && lastBeforeResponse.Success)
+			{
+				list.AddRange(
+					lastBeforeResponse.Payload
+						.Concat(influencingEvents.Payload)
+						.GroupBy(e => e.Id)
+						.Select(e => e.First())
+				);
+			}
 
 			return Success(list.AsEnumerable());
 		}

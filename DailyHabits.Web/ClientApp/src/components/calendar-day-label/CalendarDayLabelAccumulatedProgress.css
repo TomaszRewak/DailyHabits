@@ -1,0 +1,31 @@
+﻿.calendar-day-accumulated-progress {
+	height: 50px;
+	position: absolute;
+	bottom: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	border-color: inherit;
+	pointer-events: none;
+}
+
+	.calendar-day-accumulated-progress > .calendar-day-accumulated-progress-bar {
+		width: 6px;
+		background-color: blue;
+		bottom: 0;
+		align-self: center;
+		background-color: rgb(89, 89, 89);
+		border: 2px solid;
+		border-color: inherit;
+		border-bottom-width: 0;
+		border-radius: 4px 4px 0 0;
+	}
+
+.calendar-day:not(.current-date) .calendar-day-accumulated-progress {
+	margin: 3px 0;
+}
+
+.calendar-flow:not(:hover) .calendar-day-accumulated-progress-bar {
+	display: none;
+}

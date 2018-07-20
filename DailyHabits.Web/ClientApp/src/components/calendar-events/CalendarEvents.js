@@ -1,6 +1,8 @@
 ﻿import React, { Component } from 'react'
 
-import CalendarEvent from './CalendarEvent'
+import './CalendarEvents.css'
+
+import CalendarEventsEntry from './CalendarEventsEntry'
 import { Icon } from 'semantic-ui-react';
 
 export default class CalendarEvents extends Component {
@@ -9,7 +11,7 @@ export default class CalendarEvents extends Component {
 			<div className="calendar-events">
 				{
 					this.props.events.map(event =>
-						<CalendarEvent
+						<CalendarEventsEntry
 							key={event.id}
 							{...event}
 							deleteEvent={this.props.deleteEvent}
