@@ -30,7 +30,7 @@ class CalendarConfiguration extends Component {
 
 		return (
 			<div>
-				<DayPickerInput classNames="ui input" value={this.props.date.toDate()} onDayChange={this.onDateChange} />
+				<DayPickerInput value={this.props.date.toDate()} onDayChange={this.onDateChange} />
 				<Input value={this.state.days} size="mini" type="number" onChange={this.onDaysChange} />
 				<Input value={this.state.daysGrouping} size="mini" type="number" onChange={this.onDaysGroupingChange} />
 				{this.renderButtons()}

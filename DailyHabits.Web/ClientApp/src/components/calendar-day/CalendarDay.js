@@ -59,7 +59,6 @@ export default class CalendarDay extends Component {
 	}
 
 	renderAccumulatedProgress() {
-		console.dir(this.props);
 		return <CalendarDayLabelAccumulatedProgress
 			accumulatedTargetEvents={this.props.accumulatedTargetEvents}
 			maxTargetEvents={this.props.maxTargetEvents}

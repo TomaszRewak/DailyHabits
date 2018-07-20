@@ -53,12 +53,13 @@ export default connect(
 	(state) => {
 		const days = state.calendar.days;
 		const endDate = state.calendar.date;
-		const influenceWindow = state.calendar.influenceWindow;
 
 		let flows = state.habits.map(habit => {
 			const events = state.events
 				.filter(event => event.habitId === habit.id);
-			const flowDays = days + habit.target;
+
+			const influenceWindow = state.calendar.influenceWindow * habit.target;
+			const flowDays = days + influenceWindow;
 
 			let flow = Array(flowDays).fill(0).map((_, i) => ({
 				ongoingFor: Number.MAX_SAFE_INTEGER,
@@ -96,8 +97,8 @@ export default connect(
 				if (day + 1 < flowDays)
 					flow[day].accumulatedTargetEvents += flow[day + 1].accumulatedTargetEvents;
 
-				if (day + habit.target * influenceWindow < flowDays)
-					flow[day].accumulatedTargetEvents -= flow[day + habit.target * influenceWindow].events.length;
+				if (day + influenceWindow < flowDays)
+					flow[day].accumulatedTargetEvents -= flow[day + influenceWindow].events.length;
 			}
 
 			return {
