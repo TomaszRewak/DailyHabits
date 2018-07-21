@@ -40,7 +40,8 @@ namespace DailyHabits.Services.Events
 			var newEvent = new Event
 			{
 				HabitId = request.HabitId,
-				Timestamep = request.Timestamp
+				Timestamep = request.Timestamp,
+				Description = request.Description
 			};
 
 			_dataContext.Events.Add(newEvent);
@@ -51,6 +52,31 @@ namespace DailyHabits.Services.Events
 			{ return Failure<int>(); }
 
 			return Success(newEvent.Id);
+		}
+
+		public ServiceResponse UpdateEvent(UpdateEventRequest request)
+		{
+			var authResponse = _authService.GetCurrentUserId();
+
+			if (authResponse.Failure)
+				return Failure();
+
+			var updatedEvent = _dataContext
+				.Events
+				.Where(e => e.Id == request.Id && e.Habit.UserId == authResponse.Payload)
+				.FirstOrDefault();
+
+			if (updatedEvent == null)
+				return Failure();
+
+			updatedEvent.Description = request.Description;
+
+			try
+			{ _dataContext.SaveChanges(); }
+			catch (Exception)
+			{ return Failure(); }
+
+			return Success();
 		}
 
 		public ServiceResponse DeleteEvent(int eventId)
@@ -94,7 +120,8 @@ namespace DailyHabits.Services.Events
 				{
 					Id = e.Id,
 					HabitId = e.HabitId,
-					Timestamp = e.Timestamep
+					Timestamp = e.Timestamep,
+					Description = e.Description
 				})
 				.GroupBy(e => e.HabitId)
 				.Select(e => e.FirstOrDefault())
@@ -119,7 +146,8 @@ namespace DailyHabits.Services.Events
 				{
 					Id = e.Id,
 					HabitId = e.HabitId,
-					Timestamp = e.Timestamep
+					Timestamp = e.Timestamep,
+					Description = e.Description
 				})
 				.ToList();
 
@@ -143,7 +171,8 @@ namespace DailyHabits.Services.Events
 				{
 					Id = e.Id,
 					HabitId = e.HabitId,
-					Timestamp = e.Timestamep
+					Timestamp = e.Timestamep,
+					Description = e.Description
 				})
 				.ToList();
 

@@ -7,7 +7,7 @@ import moment from 'moment'
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
-import { Input, Button, Label, FormField } from 'semantic-ui-react';
+import { Input, Button, FormField } from 'semantic-ui-react';
 import './CalendarConfiguration.css'
 
 class CalendarConfiguration extends Component {
@@ -63,7 +63,7 @@ class CalendarConfiguration extends Component {
 
 	onDaysChange(event, data) {
 		this.setState({
-			days: Number.parseInt(data.value)
+			days: Number.parseInt(data.value, 10)
 		});
 	}
 

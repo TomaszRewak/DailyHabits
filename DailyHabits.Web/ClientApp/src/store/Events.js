@@ -46,6 +46,24 @@ export const actionCreators = {
 		else
 			dispatch({ type: 'ADD_EVENT_ERROR' });
 	},
+	editEvent: (event) => async (dispatch, getState) => {
+		dispatch({ type: 'EDIT_EVENT_REQUEST', event: event });
+
+		const response = await fetch(
+			'api/event',
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(event)
+			}
+		);
+
+		var result = await response.json();
+		if (result.success)
+			dispatch({ type: 'EDIT_EVENT', event: event });
+		else
+			dispatch({ type: 'EDIT_EVENT_ERROR' });
+	},
 	removeEvent: (id) => async (dispatch, getState) => {
 		dispatch({ type: 'REMOVE_EVENT_REQUEST' });
 
@@ -74,6 +92,8 @@ export const reducer = (state, action) => {
 			return action.events;
 		case 'ADD_EVENT':
 			return [...state, action.event];
+		case 'EDIT_EVENT':
+			return state.map(e => e.id !== action.event.id ? e : action.event);
 		case 'REMOVE_EVENT':
 			return state.filter(e => e.id !== action.id);
 		default:

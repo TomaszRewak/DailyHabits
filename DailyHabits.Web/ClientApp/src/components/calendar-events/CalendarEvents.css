@@ -1,1 +1,9 @@
-﻿
+﻿.calendar-events {
+	min-width: 350px;
+}
+
+.calendar-events .calendar-event {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

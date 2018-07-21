@@ -30,6 +30,7 @@ export default class CalendarWorkspace extends Component {
 							{...flow}
 							currentDate={this.props.currentDate}
 							addEvent={this.props.addEvent}
+							editEvent={this.props.editEvent}
 							deleteEvent={this.props.deleteEvent}
 							onHabitChange={this.props.onHabitChange}
 							onHabitDelete={this.props.onHabitDelete}

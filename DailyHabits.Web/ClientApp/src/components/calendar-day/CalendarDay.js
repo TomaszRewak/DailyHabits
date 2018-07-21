@@ -6,7 +6,6 @@ import CalendarProgress from './CalendarProgress'
 import CalendarMark from './CalendarMark'
 import CalendarDayDate from '../calendar-day-label/CalendarDayLabelDate'
 import CalendarDayProgress from '../calendar-day-label/CalendarDayLabelProgress'
-import CalendarDayAccumulatedProgress from '../calendar-day-label/CalendarDayLabelAccumulatedProgress';
 import CalendarDayLabelAccumulatedProgress from '../calendar-day-label/CalendarDayLabelAccumulatedProgress';
 
 export default class CalendarDay extends Component {
@@ -31,8 +30,9 @@ export default class CalendarDay extends Component {
 						<CalendarMark
 							habit={this.props.habit}
 							events={this.props.events}
-							deleteEvent={this.props.deleteEvent}
 							addEvent={this.addEvent}
+							editEvent={this.props.editEvent}
+							deleteEvent={this.props.deleteEvent}
 						/>
 					</div>
 					<CalendarDayDate date={this.props.date} />

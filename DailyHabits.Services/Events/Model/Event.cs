@@ -9,5 +9,7 @@ namespace DailyHabits.Services.Events.Model
 		public int HabitId { get; set; }
 
 		public DateTime Timestamp { get; set; }
+
+		public string Description { get; set; }
 	}
 }

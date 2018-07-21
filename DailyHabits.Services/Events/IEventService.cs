@@ -9,6 +9,8 @@ namespace DailyHabits.Services.Events
     {
 		ServiceResponse<int> CreateEvent(CreateEventRequest request);
 
+		ServiceResponse UpdateEvent(UpdateEventRequest request);
+
 		ServiceResponse DeleteEvent(int eventId);
 
 		ServiceResponse<IEnumerable<GetEventResponse>> ListEvents(DateTime from, DateTime to, int window = 1);

@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import moment from 'moment'
 import { connect } from 'react-redux';
 import { actionCreators as calendarActionCreater } from '../../store/Calendar';
 import { actionCreators as eventsActionCreator } from '../../store/Events'
@@ -16,6 +15,7 @@ class Calendar extends Component {
 
 		this.addEvent = this.addEvent.bind(this);
 		this.deleteEvent = this.deleteEvent.bind(this);
+		this.editEvent = this.editEvent.bind(this);
 	}
 
 	componentWillMount() {
@@ -29,6 +29,7 @@ class Calendar extends Component {
 				flows={this.props.flows}
 				currentDate={this.props.currentDate}
 				addEvent={this.addEvent}
+				editEvent={this.editEvent}
 				deleteEvent={this.deleteEvent}
 				onHabitChange={this.props.updateHabit}
 				onHabitDelete={this.props.deleteHabit}
@@ -42,6 +43,10 @@ class Calendar extends Component {
 			habitId: habitId,
 			timestamp: date
 		});
+	}
+
+	editEvent(event) {
+		this.props.editEvent(event);
 	}
 
 	deleteEvent(eventId) {

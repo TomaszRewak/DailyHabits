@@ -13,7 +13,8 @@ export default class CalendarEvents extends Component {
 					this.props.events.map(event =>
 						<CalendarEventsEntry
 							key={event.id}
-							{...event}
+							event={event}
+							editEvent={this.props.editEvent}
 							deleteEvent={this.props.deleteEvent}
 						/>
 					)

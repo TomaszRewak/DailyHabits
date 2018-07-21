@@ -33,6 +33,7 @@ export default class CalendarFlow extends Component {
 								maxTargetEvents={this.props.maxTargetEvents}
 								isCurrentDate={day.date.isSame(this.props.currentDate, 'day')}
 								addEvent={this.addEvent}
+								editEvent={this.props.editEvent}
 								deleteEvent={this.props.deleteEvent}
 							/>
 						)

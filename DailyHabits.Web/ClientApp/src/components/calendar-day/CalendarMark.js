@@ -16,7 +16,7 @@ export default class CalendarMark extends Component {
 				<div
 					className="calendar-mark-dot"
 					style={{ backgroundColor: this.props.habit.initialColor }}
-					onClick={this.deleteFirstEvent} />
+					onDoubleClick={this.deleteFirstEvent} />
 				<div className="calendar-mark-bubble">
 					<ExpendableIcon
 						icon={this.props.habit.icon}
@@ -30,8 +30,9 @@ export default class CalendarMark extends Component {
 						<CalendarEvents
 							date={this.props.habit.date}
 							events={this.props.events}
-							deleteEvent={this.props.deleteEvent}
 							addEvent={this.props.addEvent}
+							editEvent={this.props.editEvent}
+							deleteEvent={this.props.deleteEvent}
 						/>
 					</ExpendableIcon>
 				</div>

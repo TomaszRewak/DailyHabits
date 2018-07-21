@@ -1,0 +1,8 @@
+﻿.editable-label > .label {
+	background-color: transparent;
+	font-weight: bold;
+}
+
+	.editable-label > .label.default-value {
+		font-style: italic;
+	}

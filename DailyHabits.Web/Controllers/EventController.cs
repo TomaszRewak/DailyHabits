@@ -26,6 +26,14 @@ namespace DailyHabits.Web.Controllers
 			return ServiceResponse(response);
 		}
 
+		[HttpPost]
+		public JsonResult Update([FromBody]UpdateEventRequest request)
+		{
+			var response = _eventService.UpdateEvent(request);
+
+			return ServiceResponse(response);
+		}
+
 		[HttpDelete("{id}")]
 		public JsonResult Delete(int id)
 		{
