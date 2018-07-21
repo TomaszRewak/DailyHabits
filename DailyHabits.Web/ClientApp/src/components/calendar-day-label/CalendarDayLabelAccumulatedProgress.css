@@ -26,6 +26,6 @@
 	margin: 3px 0;
 }
 
-.calendar-flow:not(:hover) .calendar-day-accumulated-progress-bar {
+.calendar-flow:not(:hover) .calendar-day-accumulated-progress {
 	display: none;
 }

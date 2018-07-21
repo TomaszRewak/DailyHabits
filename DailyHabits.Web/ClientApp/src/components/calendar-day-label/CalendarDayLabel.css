@@ -1,6 +1,5 @@
 ﻿.calendar-day .calendar-day-date,
 .calendar-day .calendar-day-progress {
-	visibility: collapse;
 	transform: rotate(-90deg);
 	left: 50%;
 	transform-origin: right;
@@ -50,9 +49,9 @@
 	border-left-width: 0;
 }
 
-.calendar-day:hover .calendar-day-date,
-.calendar-day:hover .calendar-day-progress {
-	visibility: visible;
+.calendar-day:not(:hover) .calendar-day-date,
+.calendar-day:not(:hover) .calendar-day-progress {
+	display: none;
 }
 
 .calendar-day.current-date .calendar-day-date > span,
