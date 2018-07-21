@@ -79,7 +79,7 @@ export default connect(
 						eventDay - flowDays + 1
 					);
 				}
-				else if (eventDay < flowDays) {
+				else if (0 <= eventDay && eventDay < flowDays) {
 					flow[eventDay].events.push(event);
 					flow[eventDay].ongoingFor = 0;
 				}
