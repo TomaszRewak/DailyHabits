@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyHabits.Web", "DailyHabits.Web\DailyHabits.Web.csproj", "{7A351FCD-C459-4DBD-8F5E-E8FAE881CAE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyHabits.Model", "DailyHabits.Model\DailyHabits.Model.csproj", "{FA28C67E-58BC-4C86-AC6C-CBAE6582B440}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyHabits.Model", "DailyHabits.Model\DailyHabits.Model.csproj", "{FA28C67E-58BC-4C86-AC6C-CBAE6582B440}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyHabits.Services", "DailyHabits.Services\DailyHabits.Services.csproj", "{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyHabits.Services", "DailyHabits.Services\DailyHabits.Services.csproj", "{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{09250D69-FC15-4BA5-8FE3-A96683A4403E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
