@@ -16,5 +16,7 @@ namespace DailyHabits.Services.Habits
 		ServiceResponse<bool> HasHabit(int habitId);
 
 		ServiceResponse<IEnumerable<GetHabitResponse>> ListHabits();
+
+		ServiceResponse ChangeOrder(ChangeHabitsOrderRequest request);
     }
 }

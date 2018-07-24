@@ -49,5 +49,13 @@ namespace DailyHabits.Web.Controllers
 
 			return ServiceResponse(response);
 		}
+
+		[HttpPost("change_order")]
+		public JsonResult ChangeOrder([FromBody]ChangeHabitsOrderRequest request)
+		{
+			var response = _habitService.ChangeOrder(request);
+
+			return ServiceResponse(response);
+		}
 	}
 }

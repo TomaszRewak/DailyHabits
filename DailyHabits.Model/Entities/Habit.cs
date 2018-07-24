@@ -17,6 +17,8 @@ namespace DailyHabits.Model.Entities
 
 		public int Target { get; set; }
 
+		public int Order { get; set; }
+
 		public int UserId { get; set; }
 		public User User { get; set; }
 

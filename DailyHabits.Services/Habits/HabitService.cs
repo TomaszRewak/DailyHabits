@@ -29,6 +29,12 @@ namespace DailyHabits.Services.Habits
 			if (authResponse.Failure)
 				return Failure<int>();
 
+			int maxOrder = _dataContext.Habits
+				.Where(h => h.UserId == authResponse.Payload)
+				.Select(h => h.Order)
+				.DefaultIfEmpty(0)
+				.Max();
+
 			var newHabit = new Habit
 			{
 				Name = request.Name,
@@ -40,7 +46,8 @@ namespace DailyHabits.Services.Habits
 
 				Target = request.Target,
 
-				UserId = authResponse.Payload
+				UserId = authResponse.Payload,
+				Order = maxOrder + 1
 			};
 
 			_dataContext.Habits.Add(newHabit);
@@ -137,6 +144,7 @@ namespace DailyHabits.Services.Habits
 			var habits = _dataContext
 				.Habits
 				.Where(habit => habit.UserId == authResponse.Payload)
+				.OrderBy(h => h.Order)
 				.Select(habit => new GetHabitResponse
 				{
 					Id = habit.Id,
@@ -153,6 +161,57 @@ namespace DailyHabits.Services.Habits
 				.ToList();
 
 			return Success(habits as IEnumerable<GetHabitResponse>);
+		}
+
+		public ServiceResponse ChangeOrder(ChangeHabitsOrderRequest request)
+		{
+			var authResponse = _authService.GetCurrentUserId();
+
+			if (authResponse.Failure)
+				return Failure();
+
+			var habits = _dataContext
+				.Habits
+				.Where(h => h.UserId == authResponse.Payload)
+				.OrderBy(h => h.Order)
+				.ToList();
+
+			for (int i = 0; i < habits.Count(); i++)
+				habits[i].Order = i;
+
+			var habit = habits
+				.FirstOrDefault(h => h.Id == request.HabitId);
+
+			if (habit == null)
+				return Failure();
+
+			if (request.NewPosition < habit.Order)
+			{
+				var movedHabits = habits
+					.Where(h => h.Id != request.HabitId)
+					.Where(h => habit.Order >= h.Order && h.Order >= request.NewPosition);
+
+				foreach (var movedHabit in movedHabits)
+					movedHabit.Order++;
+			}
+			else
+			{
+				var movedHabits = habits
+					.Where(h => h.Id != request.HabitId)
+					.Where(h => habit.Order <= h.Order && h.Order <= request.NewPosition);
+
+				foreach (var movedHabit in movedHabits)
+					movedHabit.Order--;
+			}
+
+			habit.Order = request.NewPosition;
+
+			try
+			{ _dataContext.SaveChanges(); }
+			catch (Exception)
+			{ return Failure(); }
+
+			return Success();
 		}
 	}
 }

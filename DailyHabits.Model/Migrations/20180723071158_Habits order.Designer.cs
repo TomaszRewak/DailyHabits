@@ -3,14 +3,16 @@ using System;
 using DailyHabits.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DailyHabits.Model.Migrations
 {
     [DbContext(typeof(DailyHabitsDataContext))]
-    partial class DailyHabitsDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180723071158_Habits order")]
+    partial class Habitsorder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
