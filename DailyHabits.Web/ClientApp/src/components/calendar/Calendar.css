@@ -17,6 +17,7 @@
 	padding: 15px;
 	display: flex;
 	align-items: center;
+	margin: auto;
 }
 
 	.calendar-flow .calendar-flow-description {
