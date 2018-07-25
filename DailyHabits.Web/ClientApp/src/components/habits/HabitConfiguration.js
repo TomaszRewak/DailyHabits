@@ -26,6 +26,8 @@ export default class HabitConfiguration extends Component {
 		this.onCancel = this.onCancel.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onCreate = this.onCreate.bind(this);
+		this.onMoveUp = this.onMoveUp.bind(this);
+		this.onMoveDown = this.onMoveDown.bind(this);
 	}
 
 	render() {
@@ -67,6 +69,15 @@ export default class HabitConfiguration extends Component {
 					type="number"
 					onChange={this.targetChanged}
 					size="mini" />
+				{this.props.newHabit === undefined &&
+					<Label content="Order" />
+				}
+				{this.props.newHabit === undefined &&
+					<Button.Group size="mini">
+						<Button basic size="mini" labelPosition='left' icon='up chevron' content='Move up' onClick={this.onMoveUp} />
+						<Button basic size="mini" labelPosition='right' icon='down chevron' content='Move down' onClick={this.onMoveDown} />
+					</Button.Group>
+				}
 				{this.props.newHabit === undefined &&
 					<ButtonGroup size="mini" className="habit-configuration-options">
 						<Button content="Save" size="mini" onClick={this.onSave} primary disabled={!this.state.changed} />
@@ -143,5 +154,15 @@ export default class HabitConfiguration extends Component {
 	onCreate() {
 		if (this.props.onCreate)
 			this.props.onCreate(this.state.habit);
+	}
+
+	onMoveUp() {
+		if (this.props.onMove)
+			this.props.onMove(this.props.habit.id, this.props.order - 1);
+	}
+
+	onMoveDown() {
+		if (this.props.onMove)
+			this.props.onMove(this.props.habit.id, this.props.order + 1);
 	}
 }

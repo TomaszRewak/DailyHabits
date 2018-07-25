@@ -16,7 +16,10 @@ export default class Habit extends Component {
 					onChange={this.props.onChange}
 					onDelete={this.props.onDelete}
 					onCreate={this.props.onCreate}
-					newHabit={this.props.newHabit} />
+					onMove={this.props.onMove}
+					newHabit={this.props.newHabit}
+					order={this.props.order}
+				/>
 			</ExpendableIcon>
 		);
 	}

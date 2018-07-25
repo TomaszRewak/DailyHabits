@@ -19,6 +19,8 @@ export default class CalendarFlow extends Component {
 					habit={this.props.habit}
 					onChange={this.props.onHabitChange}
 					onDelete={this.props.onHabitDelete}
+					onMove={this.props.onHabitMove}
+					order={this.props.order}
 				/>
 				<div
 					className="calendar-flow-days"

@@ -180,16 +180,16 @@ namespace DailyHabits.Services.Habits
 				habits[i].Order = i;
 
 			var habit = habits
-				.FirstOrDefault(h => h.Id == request.HabitId);
+				.FirstOrDefault(h => h.Id == request.Id);
 
 			if (habit == null)
 				return Failure();
 
-			if (request.NewPosition < habit.Order)
+			if (request.Position < habit.Order)
 			{
 				var movedHabits = habits
-					.Where(h => h.Id != request.HabitId)
-					.Where(h => habit.Order >= h.Order && h.Order >= request.NewPosition);
+					.Where(h => h.Id != request.Id)
+					.Where(h => habit.Order >= h.Order && h.Order >= request.Position);
 
 				foreach (var movedHabit in movedHabits)
 					movedHabit.Order++;
@@ -197,14 +197,14 @@ namespace DailyHabits.Services.Habits
 			else
 			{
 				var movedHabits = habits
-					.Where(h => h.Id != request.HabitId)
-					.Where(h => habit.Order <= h.Order && h.Order <= request.NewPosition);
+					.Where(h => h.Id != request.Id)
+					.Where(h => habit.Order <= h.Order && h.Order <= request.Position);
 
 				foreach (var movedHabit in movedHabits)
 					movedHabit.Order--;
 			}
 
-			habit.Order = request.NewPosition;
+			habit.Order = request.Position;
 
 			try
 			{ _dataContext.SaveChanges(); }

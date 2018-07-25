@@ -66,6 +66,24 @@
 			dispatch({ type: 'UPDATE_HABIT', habit });
 		else
 			dispatch({ type: 'UPDATE_HABIT_ERROR' });
+	},
+	moveHabit: (id, position) => async (dispatch, getState) => {
+		dispatch({ type: 'MOVE_HABIT_REQUEST', id });
+
+		const response = await fetch(
+			'api/habit/change_order',
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ id, position })
+			}
+		);
+		const result = await response.json();
+
+		if (result.success)
+			dispatch({ type: 'MOVE_HABIT', id, position });
+		else
+			dispatch({ type: 'MOVE_HABIT_ERROR', id });
 	}
 }
 
@@ -83,6 +101,19 @@ export const reducer = (state, action) => {
 			return state.filter(habit => habit.id !== action.id);
 		case 'UPDATE_HABIT':
 			return state.map(habit => habit.id === action.habit.id ? action.habit : habit);
+		case 'MOVE_HABIT':
+			let orderedHabits = state.map((habit, index) => ({ habit, index }));
+			let currentPosition = state.findIndex(habit => habit.id === action.id);
+
+			if (currentPosition == -1)
+				return;
+
+			if (action.position < currentPosition)
+				orderedHabits[currentPosition].index = action.position - 0.5;
+			else
+				orderedHabits[currentPosition].index = action.position + 0.5;
+
+			return orderedHabits.sort((a, b) => a.index > b.index).map(element => element.habit);
 		default:
 			return state;
 	}

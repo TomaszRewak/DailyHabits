@@ -23,7 +23,7 @@ export default class CalendarWorkspace extends Component {
 		return (
 			<div className="calendar-workspace">
 				{
-					this.props.flows.map(flow =>
+					this.props.flows.map((flow, index) =>
 						<CalendarFlow
 							key={flow.habit.id}
 							habit={flow.habit}
@@ -34,6 +34,8 @@ export default class CalendarWorkspace extends Component {
 							deleteEvent={this.props.deleteEvent}
 							onHabitChange={this.props.onHabitChange}
 							onHabitDelete={this.props.onHabitDelete}
+							onHabitMove={this.props.onHabitMove}
+							order={index}
 						/>
 					)
 				}
