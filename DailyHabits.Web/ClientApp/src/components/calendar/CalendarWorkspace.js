@@ -1,9 +1,11 @@
-﻿import React, { Component } from 'react'
+﻿import React, { Component } from 'react';
 
-import CalendarFlow from './CalendarFlow'
-import Habit from '../habits/Habit'
+import CalendarFlow from './CalendarFlow';
+import Habit from '../habits/Habit';
 
 export default class CalendarWorkspace extends Component {
+	static displayName = 'CalendarWorkspace';
+
 	constructor(props) {
 		super(props);
 
@@ -16,7 +18,7 @@ export default class CalendarWorkspace extends Component {
 				initialColor: '#d50000',
 				finalColor: '#2979ff'
 			}
-		}
+		};
 	}
 
 	render() {
@@ -43,7 +45,8 @@ export default class CalendarWorkspace extends Component {
 					habit={this.state.newHabitTemplate}
 					onCreate={this.props.createHabit}
 					className="new-habit"
-					newHabit />
+					newHabit
+				/>
 			</div>
 		);
 	}

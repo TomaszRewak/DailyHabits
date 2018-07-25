@@ -1,4 +1,4 @@
-﻿import moment from 'moment'
+﻿import moment from 'moment';
 
 export const actionCreators = {
 	requestEventData: (startDate, endDate) => async (dispatch, getState) => {
@@ -97,6 +97,6 @@ export const reducer = (state, action) => {
 		case 'REMOVE_EVENT':
 			return state.filter(e => e.id !== action.id);
 		default:
-			return state
+			return state;
 	}
-}
+};

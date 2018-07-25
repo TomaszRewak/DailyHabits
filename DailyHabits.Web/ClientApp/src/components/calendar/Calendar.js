@@ -1,15 +1,17 @@
-﻿import './Calendar.css'
+﻿import './Calendar.css';
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators as calendarActionCreater } from '../../store/Calendar';
-import { actionCreators as eventsActionCreator } from '../../store/Events'
-import { actionCreators as habitsActionCreator } from '../../store/Habits'
+import { actionCreators as eventsActionCreator } from '../../store/Events';
+import { actionCreators as habitsActionCreator } from '../../store/Habits';
 
-import CalendarWorkspace from './CalendarWorkspace'
+import CalendarWorkspace from './CalendarWorkspace';
 
 class Calendar extends Component {
+	static displayName = 'Calendar';
+
 	constructor(props) {
 		super(props);
 
@@ -21,6 +23,21 @@ class Calendar extends Component {
 	componentWillMount() {
 		this.props.requestHabitData();
 		this.props.requestEventData();
+	}
+
+	addEvent(habitId, date) {
+		this.props.addEvent({
+			habitId: habitId,
+			timestamp: date
+		});
+	}
+
+	editEvent(event) {
+		this.props.editEvent(event);
+	}
+
+	deleteEvent(eventId) {
+		this.props.removeEvent(eventId);
 	}
 
 	render() {
@@ -37,21 +54,6 @@ class Calendar extends Component {
 				createHabit={this.props.createHabit}
 			/>
 		);
-	}
-
-	addEvent(habitId, date) {
-		this.props.addEvent({
-			habitId: habitId,
-			timestamp: date
-		});
-	}
-
-	editEvent(event) {
-		this.props.editEvent(event);
-	}
-
-	deleteEvent(eventId) {
-		this.props.removeEvent(eventId);
 	}
 }
 
@@ -71,7 +73,7 @@ export default connect(
 				ongoingFor: Number.MAX_SAFE_INTEGER,
 				events: [],
 				date: endDate.clone().add({ days: -i }),
-				accumulatedTargetEvents: 0,
+				accumulatedTargetEvents: 0
 			}));
 			let previousEvents = [];
 

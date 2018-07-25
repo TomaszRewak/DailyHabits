@@ -11,7 +11,7 @@
 		const result = await response.json();
 
 		if (result.success)
-			dispatch({ type: 'GET_HABITS', habits: result.payload })
+			dispatch({ type: 'GET_HABITS', habits: result.payload });
 		else
 			dispatch({ type: 'GET_HABITS_ERROR' });
 	},
@@ -39,7 +39,7 @@
 		const response = await fetch(
 			`api/habit/${id}`,
 			{
-				method: 'DELETE',
+				method: 'DELETE'
 			}
 		);
 		const result = await response.json();
@@ -85,7 +85,7 @@
 		else
 			dispatch({ type: 'MOVE_HABIT_ERROR', id });
 	}
-}
+};
 
 const initialState = [];
 
@@ -105,7 +105,7 @@ export const reducer = (state, action) => {
 			let orderedHabits = state.map((habit, index) => ({ habit, index }));
 			let currentPosition = state.findIndex(habit => habit.id === action.id);
 
-			if (currentPosition == -1)
+			if (currentPosition === -1)
 				return;
 
 			if (action.position < currentPosition)
@@ -117,4 +117,4 @@ export const reducer = (state, action) => {
 		default:
 			return state;
 	}
-}
+};

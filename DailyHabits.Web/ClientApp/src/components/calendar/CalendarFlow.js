@@ -1,14 +1,21 @@
 ﻿import React, { Component } from 'react';
 
-import CalendarDay from '../calendar-day/CalendarDay'
+import CalendarDay from '../calendar-day/CalendarDay';
 
-import Habit from '../habits/Habit'
+import Habit from '../habits/Habit';
 
 export default class CalendarFlow extends Component {
+	static displayName = 'CalendarFlow';
+
 	constructor(props) {
 		super(props);
 
 		this.addEvent = this.addEvent.bind(this);
+	}
+
+	addEvent(date) {
+		if (this.props.addEvent)
+			this.props.addEvent(this.props.habit.id, date);
 	}
 
 	render() {
@@ -43,10 +50,5 @@ export default class CalendarFlow extends Component {
 				</div>
 			</div>
 		);
-	}
-
-	addEvent(date) {
-		if (this.props.addEvent)
-			this.props.addEvent(this.props.habit.id, date);
 	}
 }
