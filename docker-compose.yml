@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  dailyhabits.web:
-    image: ${DOCKER_REGISTRY}dailyhabitsweb
-    build:
-      context: .
-      dockerfile: DailyHabits.Web/Dockerfile

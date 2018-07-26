@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyHabits.Model", "DailyH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyHabits.Services", "DailyHabits.Services\DailyHabits.Services.csproj", "{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{09250D69-FC15-4BA5-8FE3-A96683A4403E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F58FED4-A538-48FD-A71B-6C2D6FD75DC3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09250D69-FC15-4BA5-8FE3-A96683A4403E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
