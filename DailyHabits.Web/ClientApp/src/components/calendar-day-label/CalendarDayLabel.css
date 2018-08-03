@@ -69,3 +69,8 @@
 .calendar-flow:hover .calendar-day.first-in-month-date {
 	background-color: transparent;
 }
+
+.calendar-day.current-date .calendar-day-date > span,
+.calendar-day.current-date .calendar-day-progress > span {
+	margin: 1px;
+}
