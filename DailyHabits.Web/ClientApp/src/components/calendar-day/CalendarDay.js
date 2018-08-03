@@ -19,6 +19,9 @@ export default class CalendarDay extends Component {
 		let className = 'calendar-day';
 		if (this.props.isCurrentDate)
 			className += ' current-date';
+		if (this.props.date.date() === 1)
+			className += ' first-in-month-date';
+
 
 		if (this.props.events.length) {
 			className += ' with-events';

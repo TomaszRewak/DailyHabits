@@ -1,9 +1,9 @@
 ﻿.calendar-day {
 	width: 10px;
-	height: 20px;
+	height: 26px;
 	position: relative;
 	border-color: inherit;
-	margin: 3px 0;
+	padding: 3px 0;
 }
 
 	.calendar-day.with-events {
@@ -26,6 +26,7 @@
 			height: 100%;
 			border: 1px solid;
 			border: 1px solid rgba(0,0,0,0.5);
+			border-radius: 4px;
 		}
 
 		.calendar-day .add-event-button .calendar-mark {

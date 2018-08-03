@@ -22,10 +22,6 @@
 		border-radius: 4px 4px 0 0;
 	}
 
-.calendar-day:not(.current-date) .calendar-day-accumulated-progress {
-	margin: 3px 0;
-}
-
 .calendar-flow:not(:hover) .calendar-day-accumulated-progress {
 	display: none;
 }

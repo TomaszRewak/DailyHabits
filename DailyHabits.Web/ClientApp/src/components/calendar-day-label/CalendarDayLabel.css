@@ -15,6 +15,10 @@
 	border-color: inherit;
 }
 
+.calendar-day.first-in-month-date {
+	background-color: rgba(0,0,0,0.2);
+}
+
 .calendar-day .calendar-day-date {
 	top: 0;
 }
@@ -53,11 +57,6 @@
 	display: none;
 }
 
-.calendar-day.current-date .calendar-day-date > span,
-.calendar-day.current-date .calendar-day-progress > span {
-	margin: 0;
-}
-
 .calendar-day .calendar-day-progress > span > .calendar-day-progress-target {
 	opacity: 0.5;
 	font-size: 0.7em;
@@ -65,4 +64,8 @@
 
 .calendar-day:hover .add-event-button .calendar-mark .calendar-mark-bubble {
 	display: initial;
+}
+
+.calendar-flow:hover .calendar-day.first-in-month-date {
+	background-color: transparent;
 }
